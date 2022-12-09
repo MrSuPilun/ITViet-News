@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.admin_dashboard');
-});
+Route::prefix('/admin')->namespace('\App\Http\Controllers\Admin')->group(function () {
+    Route::match(['GET', 'POST'], '/', 'AdminController@login')->name('admin.login');
 
-Route::get('/admin', function () {
-    return view('admin.admin_login');
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+        Route::get('logout', 'AdminController@logout')->name('admin.logout');
+    });
 });
