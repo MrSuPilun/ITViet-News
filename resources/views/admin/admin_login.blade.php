@@ -28,7 +28,7 @@
         });
     </script>
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/adminlte.min.css') }}">
 </head>
@@ -43,27 +43,42 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="" method="post">
+                <form action="{{ route('admin.login') }}" method="post">
+                    @csrf
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                            id="exampleInputEmail1" placeholder="Email" aria-describedby="exampleInputEmail1-error"
+                            aria-invalid="true">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+                        @error('email')
+                            <span id="exampleInputEmail1-error" class="error invalid-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1"
+                            placeholder="Password" aria-describedby="exampleInputPassword1-error">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        @error('password')
+                            <span id="exampleInputPassword1-error" class="error invalid-feedback">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                <input type="checkbox" id="remember" name="remember">
                                 <label for="remember">
                                     Remember Me
                                 </label>
@@ -83,6 +98,7 @@
 
         <!-- jQuery -->
         <script src="{{ asset('assets/dashboard/js/core/jquery.3.2.1.min.js') }}"></script>
+        <script src="{{ asset('assets/dashboard/js/plugin/jquery-validation/jquery.validate.min.js') }}"></script>
         <!-- Bootstrap 4 -->
         <script src="{{ asset('assets/dashboard/js/plugin/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- AdminLTE App -->
