@@ -21,3 +21,7 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers\Admin')->group(functio
         Route::get('logout', 'AdminController@logout')->name('admin.logout');
     });
 });
+
+Route::get('/', function () {
+    return view('pages.home');
+});
