@@ -33,7 +33,7 @@ $(".changeLogoHeaderColor").on("click", function () {
 
     $(this).parent().find(".changeLogoHeaderColor").removeClass("selected");
     $(this).addClass("selected");
-    customCheckColor();
+    // customCheckColor();
     layoutsColors();
 });
 

@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.admin_dashboard');
+        return view('admin.admin_dashboard', ['profile' => auth('admin')->user()]);
     }
 
     public function login(Request $request)
