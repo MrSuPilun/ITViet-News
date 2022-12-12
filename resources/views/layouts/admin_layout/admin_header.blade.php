@@ -2,7 +2,7 @@
     <!-- Logo Header -->
     <div class="logo-header" data-background-color="blue">
 
-        <a href="index.html" class="logo">
+        <a href="{{ route('admin.dashboard') }}" class="logo">
             <img src="{{ asset('assets/dashboard/img/logo.svg') }}" alt="navbar brand" class="navbar-brand">
         </a>
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
@@ -250,6 +250,16 @@
                                             alt="image profile" class="avatar-img rounded"></div>
                                     <div class="u-text">
                                         <h4>{{ $profile->name }}</h4>
+                                        <h4 class="font-weight-bold">
+                                            @switch($profile->role)
+                                                @case(0)
+                                                    Administrator
+                                                @break
+
+                                                @default
+                                                    Viewer
+                                            @endswitch
+                                        </h4>
                                         <p class="text-muted">{{ $profile->email }}</p>
                                         {{-- <a href="profile.html"
                                             class="btn btn-xs btn-secondary btn-sm">View Profile</a> --}}

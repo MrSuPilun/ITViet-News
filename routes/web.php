@@ -22,7 +22,9 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
     Route::middleware(['auth:admin'])->group(function () {
         Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
         Route::get('logout', 'AdminController@logout')->name('admin.logout');
-        Route::match(['GET', 'POST'], 'new-post', 'PostController@newPost')->name('admin.newPost');
+        Route::prefix('base')->group(function () {
+            Route::match(['GET', 'POST'], 'new-post', 'PostController@newPost')->name('admin.newPost');
+        });
     });
 });
 
