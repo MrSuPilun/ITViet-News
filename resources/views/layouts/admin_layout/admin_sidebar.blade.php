@@ -68,7 +68,7 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="#">
+                                <a href="{{ route('admin.newPost') }}">
                                     <span class="sub-item">Create New Post</span>
                                 </a>
                             </li>
