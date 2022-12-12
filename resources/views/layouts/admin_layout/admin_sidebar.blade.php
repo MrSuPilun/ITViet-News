@@ -1,54 +1,9 @@
 <div class="sidebar sidebar-style-2">
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
-            <div class="user">
-                <div class="avatar-sm float-left mr-2">
-                    <img src="{{ asset('assets/dashboard/img/profile.jpg') }}" alt="..."
-                        class="avatar-img rounded-circle">
-                </div>
-                <div class="info">
-                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-                        <span>
-                            {{ $profile->name }}
-                            <span class="user-level">
-                                @switch($profile->role)
-                                    @case(0)
-                                        Administrator
-                                    @break
-
-                                    @default
-                                        Viewer
-                                @endswitch
-                            </span>
-                            <span class="caret"></span>
-                        </span>
-                    </a>
-                    <div class="clearfix"></div>
-
-                    <div class="collapse in" id="collapseExample">
-                        <ul class="nav">
-                            <li>
-                                <a href="#profile">
-                                    <span class="link-collapse">My Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#edit">
-                                    <span class="link-collapse">Edit Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#settings">
-                                    <span class="link-collapse">Settings</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <ul class="nav nav-primary">
-                <li class="nav-item active">
-                    <a class="collapsed">
+                <li class="nav-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                    <a class="collapsed" href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -59,16 +14,16 @@
                     </span>
                     <h4 class="text-section">Components</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('admin/base*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
                         <p>Base</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="base">
+                    <div class="collapse {{ request()->is('admin/base*') ? 'show' : '' }}" id="base">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="#">
+                            <li class="{{ request()->is('admin/base/new-post') ? 'active' : '' }}">
+                                <a href="{{ route('admin.newPost') }}">
                                     <span class="sub-item">Create New Post</span>
                                 </a>
                             </li>

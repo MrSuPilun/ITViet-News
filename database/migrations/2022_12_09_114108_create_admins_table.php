@@ -23,6 +23,7 @@ class CreateAdminsTable extends Migration
             $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
