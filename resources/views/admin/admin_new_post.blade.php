@@ -4,7 +4,7 @@
     <style>
         .ck-editor__editable[role="textbox"] {
             /* editing area */
-            min-height: 200px;
+            min-height: 300px;
         }
 
         .ck-content .image {
@@ -24,9 +24,29 @@
                         <div class="card-header">
                             <div class="card-title">Create New Post</div>
                         </div>
-                        <div class="card-body">
-                            <textarea class="form-control" id="editor" name="content"></textarea>
-                            {{ csrf_field() }}
+                        <div class="card-body row">
+                            <div class="col-md-6 col-lg-8">
+                                <div class="form-group">
+                                    <label for="editor">Content</label>
+                                    <textarea class="form-control" id="editor" name="content"></textarea>
+                                    {{ csrf_field() }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label for="title">Title</label>
+                                    <input type="text" class="form-control" name="title" id="title"
+                                        aria-describedby="helpId" placeholder="Enter title">
+                                    <small id="helpId" class="form-text text-muted">Article title</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="summary">Summary</label>
+                                    <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="Enter summary"></textarea>
+                                    <small id="helpId" class="form-text text-muted">
+                                        Pre-rendering part of web page content
+                                    </small>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-action">
                             <button type="submit" class="btn btn-success">Submit</button>
