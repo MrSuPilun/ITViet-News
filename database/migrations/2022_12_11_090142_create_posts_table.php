@@ -17,8 +17,8 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->foreignId('parent_id')->nullable()->constrained('posts')->cascadeOnDelete();
             $table->string('title');
-            $table->tinyText('summary');
-            $table->text('content');
+            $table->tinyText('summary')->nullable();
+            $table->text('content')->nullable();
             $table->tinyInteger('published')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
