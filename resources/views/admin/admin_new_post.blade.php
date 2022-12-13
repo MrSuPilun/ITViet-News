@@ -17,6 +17,7 @@
             width: 100%;
             max-height: 150px;
             object-fit: cover;
+            margin-top: 10px;
         }
     </style>
 @endsection
@@ -53,9 +54,10 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input id="imgInput" type="file" name="image" accept="image/*" />
-                                    <div>
-                                        <img id="imgPreview" src="" alt="">
+                                    <label for="imginput">Thumbnail</label>
+                                    <div class="form-control">
+                                        <input id="imgInput" type="file" name="image" accept="image/*" />
+                                        <img id="imgPreview">
                                     </div>
                                 </div>
                             </div>

@@ -45,6 +45,8 @@ class PostController extends Controller
                 ]);
 
                 $adminPost->save();
+
+                dd($request);
             }
         }
 

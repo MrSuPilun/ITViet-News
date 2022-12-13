@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use App\Models\Admin;
+
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +30,4 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
     });
 });
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', [HomeController::class, 'home']);
