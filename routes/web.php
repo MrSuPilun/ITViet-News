@@ -5,6 +5,7 @@ namespace App\Models;
 // use App\Models\Admin;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,4 +31,5 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
     });
 });
 
+Route::post('/image-upload', [ImageUploadController::class, 'storeImage'])->name('image.upload');
 Route::get('/', [HomeController::class, 'home']);

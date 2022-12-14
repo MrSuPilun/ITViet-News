@@ -34,7 +34,7 @@ class PostController extends Controller
                 if ($request->file('image')) {
                     $file = $request->file('image');
                     $filename = date('YmdHi') . $file->getClientOriginalName();
-                    $file->move(public_path('public/Image'), $filename);
+                    $file->move(public_path('assets/images'), $filename);
                     $post['image'] = $filename;
                 }
                 $post->save();
@@ -46,7 +46,7 @@ class PostController extends Controller
 
                 $adminPost->save();
 
-                dd($request);
+                dd($request->all());
             }
         }
 
