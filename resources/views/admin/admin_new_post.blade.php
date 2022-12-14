@@ -4,13 +4,20 @@
     <style>
         .ck-editor__editable[role="textbox"] {
             /* editing area */
-            min-height: 200px;
+            min-height: 300px;
         }
 
         .ck-content .image {
             /* block images */
             max-width: 80%;
             margin: 20px auto;
+        }
+
+        #imgPreview {
+            width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            margin-top: 10px;
         }
     </style>
 @endsection
@@ -20,13 +27,50 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="{{ route('admin.newPost') }}" method="post">
+                    <form action="{{ route('admin.newPost') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="card-header">
                             <div class="card-title">Create New Post</div>
                         </div>
-                        <div class="card-body">
-                            <textarea class="form-control" id="editor" name="content"></textarea>
-                            {{ csrf_field() }}
+                        <div class="card-body row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group @error('title') has-error @enderror">
+                                    <label for="title">Title</label>
+                                    <input type="text" class="form-control" name="title" id="title"
+                                        aria-describedby="helpId" placeholder="Enter title" maxlength="75"
+                                        value="{{ old('title') }}">
+                                    @error('title')
+                                        <small id="helpId"
+                                            class="form-text text-muted text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group @error('summary') has-error @enderror">
+                                    <label for="summary">Summary</label>
+                                    <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="Enter summary" maxlength="255"
+                                        value="{{ old('summary') }}"></textarea>
+                                    @error('summary')
+                                        <small id="helpId"
+                                            class="form-text text-muted text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="imginput">Thumbnail</label>
+                                    <div class="form-control">
+                                        <input id="imgInput" type="file" name="image" accept="image/*" />
+                                        <img id="imgPreview">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-8">
+                                <div class="form-group @error('content') has-error @enderror">
+                                    <label for="editor">Content</label>
+                                    <textarea class="form-control" id="editor" name="content"></textarea>
+                                    @error('content')
+                                        <small id="helpId"
+                                            class="form-text text-muted text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                         <div class="card-action">
                             <button type="submit" class="btn btn-success">Submit</button>
@@ -41,9 +85,25 @@
 @section('footer')
     <script src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
     <script>
+        const imgInput = document.getElementById('imgInput');
+        const imgPreview = document.getElementById('imgPreview');
+        imgInput.onchange = evt => {
+            const [file] = imgInput.files
+            if (file) {
+                imgPreview.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
+    <script>
         // This sample still does not showcase all CKEditor 5 features (!)
         // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
         CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+            ckfinder: {
+                uploadUrl: '{{ route('image.upload') . '?_token=' . csrf_token() }}',
+                options: {
+                    resourceType: 'Images'
+                },
+            },
             // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
             toolbar: {
                 items: [
@@ -61,7 +121,7 @@
                     'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed',
                     '|',
                     'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-                    'textPartLanguage', '|',
+                    // 'textPartLanguage', '|',
                     'sourceEditing'
                 ],
                 shouldNotGroupWhenFull: true
