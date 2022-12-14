@@ -29,14 +29,11 @@ class PostController extends Controller
                     'title' => $data['title'],
                     'summary' => $data['summary'],
                     'content' => $data['content'],
+
                 ]);
 
-                if ($request->file('image')) {
-                    $file = $request->file('image');
-                    $filename = date('YmdHi') . $file->getClientOriginalName();
-                    $file->move(public_path('assets/images'), $filename);
-                    $post['image'] = $filename;
-                }
+                $post->image = $request->image;
+
                 $post->save();
 
                 $adminPost = AdminPost::create([
@@ -46,7 +43,7 @@ class PostController extends Controller
 
                 $adminPost->save();
 
-                dd($request->all());
+                dd($post->image);
             }
         }
 
