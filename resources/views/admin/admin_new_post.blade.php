@@ -2,10 +2,12 @@
 
 @section('header')
     <style>
-        #imgPreview {
+        #holder>img {
+            margin-top: 0.6rem;
             width: 100%;
             max-height: 150px;
             object-fit: cover;
+            border-radius: 5px;
         }
     </style>
 @endsection
@@ -48,7 +50,7 @@
                                             <span class="input-group-btn">
                                                 <a id="lfm" data-input="thumbnail" data-preview="holder"
                                                     class="btn btn-primary text-white font-weight-bold">
-                                                    <i class="fa fa-image"></i> Choose
+                                                    <i class="fa fa-image"></i> Import
                                                 </a>
                                             </span>
                                             <input id="thumbnail" class="form-control" type="text" name="image">
