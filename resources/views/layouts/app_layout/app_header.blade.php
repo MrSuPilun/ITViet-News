@@ -12,13 +12,20 @@
                         Contact
                     </a>
 
-                    <a href="#" class="left-topbar-item">
-                        Sing up
-                    </a>
+                    @auth('user')
+                        <a href="{{ route('user.profile') }}" class="left-topbar-item">
+                            {{ auth('user')->user()->name }}
+                        </a>
+                    @else
+                        <a href="#" class="left-topbar-item">
+                            Sing up
+                        </a>
 
-                    <a href="{{ route('login') }}" class="left-topbar-item">
-                        Log in
-                    </a>
+                        <a href="{{ route('login') }}" class="left-topbar-item">
+                            Log in
+                        </a>
+                    @endauth
+
                 </div>
 
                 <div class="right-topbar">

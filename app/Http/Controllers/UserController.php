@@ -26,4 +26,15 @@ class UserController extends Controller
         }
         return view('pages.login');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('user')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
 }

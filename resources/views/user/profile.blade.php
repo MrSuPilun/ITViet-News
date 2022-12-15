@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    OK
+    <a href="{{ route('user.logout') }}">Logout</a>
 </body>
 
 </html>
