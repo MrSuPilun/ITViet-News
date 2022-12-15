@@ -17,7 +17,7 @@
                             {{ auth('user')->user()->name }}
                         </a>
                     @else
-                        <a href="#" class="left-topbar-item">
+                        <a href="{{ route('user.register') }}" class="left-topbar-item">
                             Sing up
                         </a>
 

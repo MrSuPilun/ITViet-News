@@ -13,22 +13,27 @@
                             @csrf
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control rounded-left" placeholder="Enter email"
+                                    <input type="text" class="form-control rounded-left" placeholder="Email"
                                         name="email" required>
                                     <div class="input-group-addon">
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </div>
                                 </div>
-
+                                @error('email')
+                                    <label class="text-danger small">{{ $message }}</label>
+                                @enderror
                             </div>
-                            <div class="form-group d-flex">
+                            <div class="form-group">
                                 <div class="input-group" id="show_hide_password">
-                                    <input type="password" class="form-control rounded-left" placeholder="Enter password"
+                                    <input type="password" class="form-control rounded-left" placeholder="Password"
                                         name="password" required>
-                                    <div class="input-group-addon" style="background-color: none !important;">
+                                    <div class="input-group-addon">
                                         <a><i class="fa fa-lock" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
+                                @error('password')
+                                    <label class="text-danger small">{{ $message }}</label>
+                                @enderror
                             </div>
                             <div class="form-group d-md-flex">
                                 <div class="w-50">
@@ -47,7 +52,7 @@
                             </div>
                             <div class="form-group d-md-flex">
                                 <div class="w-50 text-md-left">
-                                    <a href="#">Register account</a>
+                                    <a href="{{ route('user.register') }}">Sign Up</a>
                                 </div>
                                 <div class="w-50 text-md-right">
                                     <a href="#">Forgot Password?</a>

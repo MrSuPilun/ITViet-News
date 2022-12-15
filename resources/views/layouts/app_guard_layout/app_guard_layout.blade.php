@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login ITViet</title>
     <link rel="stylesheet" href="{{ asset('assets/app/vendor/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/app/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/app/fonts/fontawesome-5.0.8/css/fontawesome-all.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <style>
@@ -166,6 +169,10 @@
             background: #1089ff;
             color: #fff;
         }
+
+        .input-group-addon {
+            width: 40px;
+        }
     </style>
 
     {{-- HEADER --}}
@@ -179,7 +186,7 @@
     {{-- SCRIPT --}}
     <script src="{{ asset('assets/app/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('assets/app/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/app/vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('assets/app/vendor/bootstrap/js/popper.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $("#show_hide_password a").on('click', function(event) {

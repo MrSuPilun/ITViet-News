@@ -37,4 +37,12 @@ class UserController extends Controller
 
         return redirect('/');
     }
+
+    public function register(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            dd($request->all());
+        }
+        return view('pages.register');
+    }
 }
