@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+namespace App\Http\Controllers;
+
 // use App\Models\Admin;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,12 +32,16 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
     });
 });
 
+
 Route::get('/', [HomeController::class, 'home']);
-Route::get('/login', function () {
-    return view('pages.login');
-})->name('user.login');
+
+Route::match(['GET', 'POST'], 'login', [UserController::class, 'login'])->name('login');
+
+Route::prefix('/user')->namespace('\App\Http\Controllers')->middleware(['auth:user'])->group(function () {
+    Route::get('/', 'UserController@profile')->name('user.profile');
+});
 
 
-Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'auth:admin']], function () {
+Route::group(['prefix' => 'filemanager', 'middleware' => ['auth:admin', 'auth:user']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

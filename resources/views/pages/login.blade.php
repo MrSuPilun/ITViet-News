@@ -9,7 +9,8 @@
                         <h3 class="text-center mb-4">
                             Sign In
                         </h3>
-                        <form action="#" class="login-form" method="post">
+                        <form action="{{ route('login') }}" class="login-form" method="post">
+                            @csrf
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" class="form-control rounded-left" placeholder="Enter email"

@@ -16,7 +16,7 @@
                         Sing up
                     </a>
 
-                    <a href="#" class="left-topbar-item">
+                    <a href="{{ route('login') }}" class="left-topbar-item">
                         Log in
                     </a>
                 </div>
