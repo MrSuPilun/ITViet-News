@@ -32,6 +32,9 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'home']);
+Route::get('/login', function () {
+    return view('pages.login');
+})->name('user.login');
 
 
 Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'auth:admin']], function () {
