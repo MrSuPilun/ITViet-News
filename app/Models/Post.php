@@ -21,4 +21,9 @@ class Post extends Model
     {
         return $this->hasMany(PostComment::class, 'post_id');
     }
+
+    public function getFirstComments()
+    {
+        return $this->comments()->where('parent_id', null);
+    }
 }
