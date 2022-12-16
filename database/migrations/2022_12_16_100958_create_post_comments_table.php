@@ -17,6 +17,7 @@ class CreatePostCommentsTable extends Migration
             $table->id();
             $table->foreignId('parent_id')->nullable()->constrained('post_comments')->cascadeOnDelete();
             $table->foreignId('post_id')->constrained('posts')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->integer('like')->default(0);
             $table->text('content');
             $table->timestamps();

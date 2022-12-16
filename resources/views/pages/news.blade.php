@@ -18,8 +18,8 @@
         }
 
         /* .comment-text {
-                                                font-size: 12px
-                                            } */
+                                                                                                                                                                                                                                                                                                                font-size: 12px
+                                                                                                                                                                                                                                                                                                            } */
 
         .fs-12 {
             font-size: 12px
@@ -142,48 +142,72 @@
                         </div>
 
                         <!-- Leave a comment -->
+
                         <div>
                             <h4 class="f1-l-4 cl3 p-b-12">
                                 Leave a Comment
                             </h4>
+                            @auth('user')
+                                {{-- Comment --}}
+                                <div class="d-flex flex-column comment-section">
+                                    @foreach ($post->comments()->get() as $item)
+                                        <div class="bg-white p-2">
+                                            <div class="d-flex flex-row user-info">
+                                                <div>
+                                                    <img class="rounded-circle" src="{{ $item->user()->avatar }}"
+                                                        width="40">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-start ml-2">
+                                                    <span class="d-block font-weight-bold name">{{ $item->user()->name }}</span>
+                                                    <span class="date text-black-50">{{ $item->created_at }}</span>
+                                                    <div class="mt-2">
+                                                        <p class="comment-text">{{ $item->content }}</p>
+                                                    </div>
+                                                    <div class="bg-white">
+                                                        <div class="d-flex flex-row fs-12">
+                                                            <div class="like pr-2 pt-2 pb-2 cursor"><i
+                                                                    class="fa fa-thumbs-up"></i><span
+                                                                    class="ml-1">{{ $item->like }} Like</span></div>
+                                                            <div class="like p-2 cursor"><i class="fa fa-comment"></i><span
+                                                                    class="ml-1">Comment</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                            <p class="f1-s-13 cl8 p-b-40">
-                                Your email address will not be published. Required fields are marked *
-                            </p>
-                            {{-- Comment --}}
-                            <div class="d-flex flex-column comment-section">
-                                <div class="bg-white p-2">
-                                    <div class="d-flex flex-row user-info"><img class="rounded-circle"
-                                            src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                                        <div class="d-flex flex-column justify-content-start ml-2"><span
-                                                class="d-block font-weight-bold name">Marry Andrews</span><span
-                                                class="date text-black-50">Shared publicly - Jan 2020</span>
+
                                         </div>
-                                    </div>
-                                    <div class="mt-2">
-                                        <p class="comment-text">Hướng dẫn lập trình c++ Ẩn</p>
-                                    </div>
-                                </div>
-                                <div class="bg-white">
-                                    <div class="d-flex flex-row fs-12">
-                                        <div class="like p-2 cursor"><i class="fa fa-thumbs-up"></i><span
-                                                class="ml-1">Like</span></div>
-                                        <div class="like p-2 cursor"><i class="fa fa-comment"></i><span
-                                                class="ml-1">Comment</span></div>
-                                    </div>
-                                </div>
-                                <div class="bg-light p-2">
-                                    <div class="d-flex flex-row align-items-start"><img class="rounded-circle"
-                                            src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                                        <textarea class="form-control ml-1 shadow-none textarea"></textarea>
-                                    </div>
-                                    <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none"
-                                            type="button">Post
-                                            comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none"
-                                            type="button">Cancel</button></div>
-                                </div>
-                            </div>
+                                    @endforeach
 
+                                    <div class="bg-light p-2">
+                                        <form action="{{ route('user.comment') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                            <div class="d-flex flex-row align-items-start">
+                                                <div>
+                                                    <img class="rounded-circle" src="{{ auth('user')->user()->avatar }}"
+                                                        width="40">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-start ml-2" style="width: 100%">
+                                                    <p class="d-block font-weight-bold name">{{ auth()->user()->name }}</p>
+                                                    <textarea class="form-control shadow-none textarea" name="content" placeholder="...Nhập bình luận..."></textarea>
+                                                </div>
+
+                                            </div>
+                                            <div class="mt-2 text-right">
+                                                <button type="submit" class="btn btn-primary btn-sm shadow-none"
+                                                    type="button">
+                                                    Bình luận
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            @else
+                                <p class="f1-s-13 cl8 p-b-40">
+                                    Please <a href="{{ route('login') }}">login</a> before commenting
+                                </p>
+                            @endauth
                         </div>
                     </div>
                 </div>
