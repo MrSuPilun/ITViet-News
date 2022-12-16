@@ -26,6 +26,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app/css/main.css') }}">
     <!--===============================================================================================-->
+    @yield('header')
 </head>
 
 <body class="animsition">
@@ -58,6 +59,8 @@
     <script src="{{ asset('assets/app/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <!--===============================================================================================-->
     <script src="{{ asset('assets/app/js/main.js') }}"></script>
+
+    @yield('footer')
 
 </body>
 

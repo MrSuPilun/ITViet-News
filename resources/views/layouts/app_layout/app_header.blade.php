@@ -56,7 +56,7 @@
         <div class="wrap-header-mobile">
             <!-- Logo moblie -->
             <div class="logo-mobile">
-                <a href="index.html"><img src="{{ asset('assets/app/images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
+                <a href="/"><img src="{{ asset('assets/app/images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
             </div>
 
             <!-- Button show menu -->
@@ -189,7 +189,7 @@
         <div class="wrap-logo no-banner container">
             <!-- Logo desktop -->
             <div class="logo">
-                <a href="index.html"><img src="{{ asset('assets/app/images/icons/logo-01.png') }}" alt="LOGO"></a>
+                <a href="/"><img src="{{ asset('assets/app/images/icons/logo-01.png') }}" alt="LOGO"></a>
             </div>
         </div>
 
@@ -198,7 +198,7 @@
             <div class="main-nav">
                 <!-- Menu desktop -->
                 <nav class="menu-desktop">
-                    <a class="logo-stick" href="index.html">
+                    <a class="logo-stick" href="/">
                         <img src="{{ asset('assets/app/images/icons/logo-01.png') }}" alt="LOGO">
                     </a>
 

@@ -23,7 +23,7 @@ class UserController extends Controller
             ]);
             if (Auth::guard('user')->attempt($data, $request->remember)) {
                 $request->session()->regenerate();
-                return redirect()->route('user.profile');
+                return redirect('/');
             }
         }
         return view('pages.login');
