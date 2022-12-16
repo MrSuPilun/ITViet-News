@@ -19,6 +19,9 @@
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                     </div>
                                 </div>
+                                @error('name')
+                                    <label class="text-danger small">{{ $message }}</label>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
@@ -28,6 +31,9 @@
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </div>
                                 </div>
+                                @error('email')
+                                    <label class="text-danger small">{{ $message }}</label>
+                                @enderror
                             </div>
                             <div class="form-group d-flex">
                                 <div class="input-group" id="show_hide_password">
@@ -37,15 +43,21 @@
                                         <a><i class="fa fa-lock" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
+                                @error('password')
+                                    <label class="text-danger small">{{ $message }}</label>
+                                @enderror
                             </div>
                             <div class="form-group d-flex">
                                 <div class="input-group" id="confirm_password">
                                     <input type="password" class="form-control rounded-left" placeholder="Confirm password"
-                                        name="confirm-password" required>
+                                        name="confirm_password" required>
                                     <div class="input-group-addon">
                                         <a><i class="fa fa-xmark" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
+                                @error('confirm_password')
+                                    <label class="text-danger small">{{ $message }}</label>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <button type="submit"
