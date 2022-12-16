@@ -12,8 +12,8 @@ class Post extends Model
 
     protected $fillable = ['title', 'content'];
 
-    public function authors()
+    public function admins()
     {
-        return $this->belongsToMany(Admin::class, 'admin_posts', 'post_id', 'admin_id');
+        return $this->belongsToMany(Admin::class, 'admin_posts');
     }
 }
