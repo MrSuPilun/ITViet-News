@@ -26,24 +26,17 @@ class PostController extends Controller
 
 
                 $post = Post::create([
+                    'author_id' => auth('admin')->user()->id,
                     'title' => $data['title'],
                     'summary' => $data['summary'],
                     'content' => $data['content'],
-
                 ]);
 
-                $post->image = $request->image;
+                $post->thumbnail = $request->thumbnail;
 
                 $post->save();
 
-                $adminPost = AdminPost::create([
-                    'admin_id' => auth('admin')->user()->id,
-                    'post_id' => $post->id
-                ]);
-
-                $adminPost->save();
-
-                dd($post->image);
+                dd($post);
             }
         }
 

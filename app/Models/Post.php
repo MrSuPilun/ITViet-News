@@ -10,10 +10,10 @@ class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['author_id', 'title', 'content'];
 
-    public function admins()
+    public function author()
     {
-        return $this->belongsToMany(Admin::class, 'admin_posts');
+        return $this->belongsTo(Admin::class, 'author_id');
     }
 }

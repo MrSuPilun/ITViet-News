@@ -21,6 +21,6 @@ class Admin extends Authenticatable
 
     public function posts()
     {
-        return $this->belongsToMany(Post::class, 'admin_posts', 'admin_id', 'post_id');
+        return $this->hasMany(Post::class, 'author_id', 'id');
     }
 }

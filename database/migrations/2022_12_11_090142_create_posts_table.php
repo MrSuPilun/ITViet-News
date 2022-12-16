@@ -16,9 +16,12 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('parent_id')->nullable()->constrained('posts')->cascadeOnDelete();
+            $table->foreignId('author_id')->constrained('admins')->cascadeOnDelete();
             $table->string('title');
             $table->tinyText('summary')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->text('content')->nullable();
+            $table->integer('view')->default(0);
             $table->tinyInteger('published')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

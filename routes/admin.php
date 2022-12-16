@@ -13,6 +13,6 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
 });
 
 // FILE MANAGER
-Route::group(['prefix' => 'filemanager', 'middleware' => ['auth:admin', 'auth:user']], function () {
+Route::group(['prefix' => 'filemanager', 'middleware' => ['auth:admin']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

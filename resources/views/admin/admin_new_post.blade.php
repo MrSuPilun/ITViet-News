@@ -53,7 +53,7 @@
                                                     <i class="fa fa-image"></i> Import
                                                 </a>
                                             </span>
-                                            <input id="thumbnail" class="form-control" type="text" name="image">
+                                            <input id="thumbnail" class="form-control" type="text" name="thumbnail">
                                         </div>
                                         <div id="holder"></div>
                                     </div>

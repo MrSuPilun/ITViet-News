@@ -21,41 +21,38 @@
             <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-8">
                     <div class="p-r-10 p-r-0-sr991">
-                        <!-- Blog Detail -->
+                        <!-- Post Detail -->
                         <div id="post_content" class="p-b-70">
-                            <a href="#" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
-                                Technology
-                            </a>
-
+                            {{-- Title --}}
                             <h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
                                 {{ $post->title }}
                             </h3>
-
+                            {{-- Details Post --}}
                             <div class="flex-wr-s-s p-b-40">
                                 <span class="f1-s-3 cl8 m-r-15">
+                                    {{-- Author --}}
                                     <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-                                        {{-- by John Alvarado --}}
-                                        by {{ $post->admins()->first()->name }}
+                                        by {{ $post->author()->first()->name }}
                                     </a>
 
                                     <span class="m-rl-3">-</span>
-
+                                    {{-- Time --}}
                                     <span>
-                                        Feb 18
+                                        {{ $post->created_at }}
                                     </span>
                                 </span>
-
+                                {{-- Views --}}
                                 <span class="f1-s-3 cl8 m-r-15">
-                                    5239 Views
+                                    {{ $post->view }} Views
                                 </span>
 
                                 <a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
                                     0 Comment
                                 </a>
                             </div>
-
+                            {{-- Thumbnail --}}
                             <div class="wrap-pic-max-w p-b-30">
-                                <img src="{{ $post->image }}" alt="IMG">
+                                <img src="{{ $post->thumbnail }}" alt="IMG">
                             </div>
 
                             {{-- CONTENT --}}
