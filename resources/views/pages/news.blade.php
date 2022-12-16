@@ -12,6 +12,38 @@
         #post_content img {
             width: 100%;
         }
+
+        .date {
+            font-size: 11px
+        }
+
+        /* .comment-text {
+                                                font-size: 12px
+                                            } */
+
+        .fs-12 {
+            font-size: 12px
+        }
+
+        .shadow-none {
+            box-shadow: none
+        }
+
+        .name {
+            color: #007bff
+        }
+
+        .cursor:hover {
+            color: blue
+        }
+
+        .cursor {
+            cursor: pointer
+        }
+
+        .textarea {
+            resize: none
+        }
     </style>
 @endsection
 
@@ -118,28 +150,45 @@
                             <p class="f1-s-13 cl8 p-b-40">
                                 Your email address will not be published. Required fields are marked *
                             </p>
+                            {{-- Comment --}}
+                            <div class="d-flex flex-column comment-section">
+                                <div class="bg-white p-2">
+                                    <div class="d-flex flex-row user-info"><img class="rounded-circle"
+                                            src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                        <div class="d-flex flex-column justify-content-start ml-2"><span
+                                                class="d-block font-weight-bold name">Marry Andrews</span><span
+                                                class="date text-black-50">Shared publicly - Jan 2020</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="comment-text">Hướng dẫn lập trình c++ Ẩn</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white">
+                                    <div class="d-flex flex-row fs-12">
+                                        <div class="like p-2 cursor"><i class="fa fa-thumbs-up"></i><span
+                                                class="ml-1">Like</span></div>
+                                        <div class="like p-2 cursor"><i class="fa fa-comment"></i><span
+                                                class="ml-1">Comment</span></div>
+                                    </div>
+                                </div>
+                                <div class="bg-light p-2">
+                                    <div class="d-flex flex-row align-items-start"><img class="rounded-circle"
+                                            src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                        <textarea class="form-control ml-1 shadow-none textarea"></textarea>
+                                    </div>
+                                    <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none"
+                                            type="button">Post
+                                            comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none"
+                                            type="button">Cancel</button></div>
+                                </div>
+                            </div>
 
-                            <form>
-                                <textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg"
-                                    placeholder="Comment..."></textarea>
-
-                                <input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                                    name="name" placeholder="Name*">
-
-                                <input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                                    name="email" placeholder="Email*">
-
-                                <input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                                    name="website" placeholder="Website">
-
-                                <button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-                                    Post Comment
-                                </button>
-                            </form>
                         </div>
                     </div>
                 </div>
 
+                {{-- SideBar --}}
                 <div class="col-md-10 col-lg-4 p-b-30">
                     <div class="p-l-10 p-rl-0-sr991 p-t-33">
                         <!-- Most Popular -->
@@ -206,7 +255,8 @@
                         <!--  -->
                         <div class="flex-c-s p-t-8 p-b-65">
                             <a href="#">
-                                <img class="max-w-full" src="{{ asset('assets/app/images/banner-02.jpg') }}" alt="IMG">
+                                <img class="max-w-full" src="{{ asset('assets/app/images/banner-02.jpg') }}"
+                                    alt="IMG">
                             </a>
                         </div>
 
