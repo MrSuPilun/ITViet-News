@@ -23,6 +23,10 @@ class RedirectIfAuthenticated
             return redirect()->route('admin.dashboard');
         }
 
+        if (Auth::guard('user')->check()) {
+            return redirect()->route('user.profile');
+        }
+
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
