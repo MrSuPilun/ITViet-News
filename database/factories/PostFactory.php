@@ -17,6 +17,7 @@ class PostFactory extends Factory
             'title' => $this->faker->title(),
             'summary' => $this->faker->paragraph(),
             'content' => $this->faker->paragraph(10),
+            'author_id' => 1,
         ];
     }
 }

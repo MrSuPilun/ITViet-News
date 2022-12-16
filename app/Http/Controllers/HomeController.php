@@ -19,6 +19,9 @@ class HomeController extends Controller
     {
         if ($request->has('id')) {
             $post = Post::find($request->id);
+            $post->view += 1;
+            $post->save();
+
             if ($post) {
                 return view('pages.news', ['post' => $post]);
             }
