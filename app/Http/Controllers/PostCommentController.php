@@ -14,12 +14,14 @@ class PostCommentController extends Controller
             'content' => ['required']
         ]);
 
-        $comment = PostComment::create([
-            'post_id' => $request->post_id,
-            'user_id' => auth('user')->user()->id,
-            'content' => $data['content'],
-        ]);
+        $data['parent_id'] = null;
+        $data['post_id'] = $request->post_id;
+        $data['user_id'] = auth('user')->user()->id;
+        if ($request->has('parent_id')) {
+            $data['parent_id'] = $request->parent_id;
+        }
 
+        $comment = PostComment::create($data);
         $comment->save();
 
         return redirect()->back();

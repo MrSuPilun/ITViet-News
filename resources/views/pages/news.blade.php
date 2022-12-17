@@ -18,8 +18,8 @@
         }
 
         /* .comment-text {
-                                                                                                                                                                                                                                                                                                                                            font-size: 12px
-                                                                                                                                                                                                                                                                                                                                        } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                font-size: 12px
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } */
 
         .fs-12 {
             font-size: 12px
@@ -147,13 +147,13 @@
                             <h4 class="f1-l-4 cl3 p-b-12">
                                 Leave a Comment
                             </h4>
-                            @auth('user')
-                                {{-- Comment --}}
-                                <div class="d-flex flex-column comment-section">
-                                    @foreach ($post->getFirstComments()->get() as $item)
-                                        <x-comment-box :item="$item" level="0" />
-                                    @endforeach
 
+                            {{-- Comment --}}
+                            <div class="d-flex flex-column comment-section">
+                                @foreach ($post->getFirstComments()->get() as $item)
+                                    <x-comment-box :item="$item" level="0" />
+                                @endforeach
+                                @auth('user')
                                     <div class="bg-light p-2">
                                         <form action="{{ route('user.comment') }}" method="post">
                                             @csrf
@@ -163,7 +163,7 @@
                                                     <img class="rounded-circle" src="{{ auth('user')->user()->avatar }}"
                                                         width="40">
                                                 </div>
-                                                <div class="d-flex flex-column justify-content-start ml-2" style="width: 100%">
+                                                <div class="d-flex flex-column justify-content-start ml-2 w-100">
                                                     <p class="d-block font-weight-bold name">{{ auth()->user()->name }}</p>
                                                     <textarea class="form-control shadow-none textarea" name="content" placeholder="...Nhập bình luận..."></textarea>
                                                 </div>
@@ -176,12 +176,13 @@
                                             </div>
                                         </form>
                                     </div>
-                                </div>
-                            @else
-                                <p class="f1-s-13 cl8 p-b-40">
-                                    Please <a href="{{ route('login') }}">login</a> before commenting
-                                </p>
-                            @endauth
+                                @else
+                                    <p class="f1-s-13 cl8 p-b-40">
+                                        Please <a href="{{ route('login') }}">login</a> before commenting
+                                    </p>
+                                @endauth
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -355,4 +356,40 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('footer')
+    <script>
+        function removeComment(e) {
+            $(e)?.parent()?.parent()?.parent()?.remove();
+        }
+
+        function formComment(id) {
+            return "<div class='bg-light p-2 reply-form'>" +
+                "<form action='{{ route('user.comment') }}' method='post'>" +
+                `@csrf` +
+                `<input type='hidden' name='parent_id' value='` + id + `'>` +
+                `<input type='hidden' name='post_id' value='{{ $post->id }}'>` +
+                "<div class='d-flex flex-row align-items-start'>" +
+                "<div><img class='rounded-circle' src='{{ auth('user')->user()->avatar }}' width='40'></div>" +
+                "<div class='d-flex flex-column justify-content-start ml-2 w-100'>" +
+                "<p class='d-block font-weight-bold name'>{{ auth()->user()->name }}</p>" +
+                "<textarea class='form-control shadow-none textarea' name='content' placeholder='...Nhập bình luận...'></textarea>" +
+                "</div></div>" +
+                "<div class='mt-2 text-right'>" +
+                "<button type='submit' class='btn btn-primary btn-sm shadow-none' type='button'>Bình luận</button>" +
+                "<div onClick='removeComment(this)' class='btn btn-danger btn-sm ml-1 shadow-none'>Cancel</div>" +
+                "</div></form></div>";
+        }
+
+
+        $(document).ready(function() {
+            $('.reply-btn').click(function() {
+                let replyId = $(this).data('replyId');
+                let parent = $(this).parent().parent();
+                $('.comment-section').find("div.reply-form").remove();
+                parent.append(formComment(replyId));
+            });
+        });
+    </script>
 @endsection

@@ -11,7 +11,7 @@ class PostComment extends Model
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'post_id', 'user_id', 'content',
+        'post_id', 'user_id', 'content', 'parent_id'
     ];
 
     public function user()
@@ -22,5 +22,15 @@ class PostComment extends Model
     public function getChildren()
     {
         return $this->hasMany(PostComment::class, 'parent_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(PostComment::class, 'parent_id');
+    }
+
+    public function getUserComment()
+    {
+        return $this->parent()->first()->user()->first();
     }
 }

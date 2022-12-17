@@ -3,17 +3,27 @@
         <div>
             <img class="rounded-circle" src="{{ $item->user()->avatar }}" width="40">
         </div>
-        <div class="d-flex flex-column justify-content-start ml-2">
-            <span class="d-block font-weight-bold name">{{ $item->user()->name }}</span>
-            <span class="date text-black-50">{{ $item->created_at }}</span>
+        <div class="d-flex flex-column justify-content-start ml-2 w-100">
+            <p class="d-block font-weight-bold name">{{ $item->user()->name }}</p>
+            <p class="date text-black-50">{{ $item->created_at }}</p>
             <div class="mt-2">
-                <p class="comment-text">{{ $item->content }}</p>
+                <p class="comment-text">
+                    @if ($level >= 3)
+                        <b class="text-primary">{{ '@' . $item->getUserComment()->first()->name }}</b>
+                    @endif
+                    {{ $item->content }}
+                    </b>
             </div>
             <div class="bg-white">
                 <div class="d-flex flex-row fs-12">
-                    <div class="like pr-2 pt-2 pb-2 cursor"><i class="fa fa-thumbs-up"></i><span
-                            class="ml-1">{{ $item->like }} Like</span></div>
-                    <div class="like p-2 cursor"><i class="fa fa-comment"></i><span class="ml-1">Comment</span></div>
+                    <div class="like pr-2 pt-2 pb-2 cursor">
+                        <i class="fa fa-thumbs-up"></i>
+                        <span class="ml-1">{{ $item->like }} Thích</span>
+                    </div>
+                    <div class="like p-2 cursor reply-btn" data-reply-id="{{ $item->id }}">
+                        <i class="fa fa-comment"></i>
+                        <span class="ml-1">Trả lời</span>
+                    </div>
                 </div>
             </div>
             @if ($level < 3)
