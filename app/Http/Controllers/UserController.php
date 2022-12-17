@@ -65,7 +65,7 @@ class UserController extends Controller
             auth('user')->attempt(['email' => $data['email'], 'password' => $data['password']], true);
             $request->session()->regenerate();
 
-            return redirect()->route('user.profile');
+            return redirect('/');
         }
         return view('pages.register');
     }

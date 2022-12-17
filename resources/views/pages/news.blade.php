@@ -12,11 +12,43 @@
         #post_content img {
             width: 100%;
         }
+
+        .date {
+            font-size: 11px
+        }
+
+        /* .comment-text {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                font-size: 12px
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } */
+
+        .fs-12 {
+            font-size: 12px
+        }
+
+        .shadow-none {
+            box-shadow: none
+        }
+
+        .name {
+            color: #007bff
+        }
+
+        .cursor:hover {
+            color: blue
+        }
+
+        .cursor {
+            cursor: pointer
+        }
+
+        .textarea {
+            resize: none
+        }
     </style>
 @endsection
 
 @section('content')
-    <section class="bg0 p-t-70">
+    <section class="bg0 p-b-140 p-t-10">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-8">
@@ -110,100 +142,54 @@
                         </div>
 
                         <!-- Leave a comment -->
+
                         <div>
                             <h4 class="f1-l-4 cl3 p-b-12">
                                 Leave a Comment
                             </h4>
 
-                            <p class="f1-s-13 cl8 p-b-40">
-                                Your email address will not be published. Required fields are marked *
-                            </p>
+                            {{-- Comment --}}
+                            <div class="d-flex flex-column comment-section">
+                                @foreach ($post->getFirstComments()->get() as $item)
+                                    <x-comment-box :item="$item" level="0" />
+                                @endforeach
+                                @auth('user')
+                                    <div class="bg-light p-2">
+                                        <form action="{{ route('user.comment') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                            <div class="d-flex flex-row align-items-start">
+                                                <div>
+                                                    <img class="rounded-circle" src="{{ auth('user')->user()->avatar }}"
+                                                        width="40">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-start ml-2 w-100">
+                                                    <p class="d-block font-weight-bold name">{{ auth()->user()->name }}</p>
+                                                    <textarea class="form-control shadow-none textarea" name="content" placeholder="...Nhập bình luận..."></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2 text-right">
+                                                <button type="submit" class="btn btn-primary btn-sm shadow-none"
+                                                    type="button">
+                                                    Bình luận
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                @else
+                                    <p class="f1-s-13 cl8 p-b-40">
+                                        Please <a href="{{ route('login') }}">login</a> before commenting
+                                    </p>
+                                @endauth
+                            </div>
 
-                            <form>
-                                <textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg"
-                                    placeholder="Comment..."></textarea>
-
-                                <input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                                    name="name" placeholder="Name*">
-
-                                <input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                                    name="email" placeholder="Email*">
-
-                                <input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                                    name="website" placeholder="Website">
-
-                                <button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-                                    Post Comment
-                                </button>
-                            </form>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-10 col-lg-4">
-                    <div class="p-l-10 p-rl-0-sr991 p-b-20">
-                        <!-- Stay Connected -->
-                        <div class="p-b-35">
-                            <div class="how2 how2-cl4 flex-s-c">
-                                <h3 class="f1-m-2 cl3 tab01-title">
-                                    Stay Connected
-                                </h3>
-                            </div>
-
-                            <ul class="p-t-35">
-                                <li class="flex-wr-sb-c p-b-20">
-                                    <a href="#"
-                                        class="size-a-8 flex-c-c borad-3 size-a-8 bg-facebook fs-16 cl0 hov-cl0">
-                                        <span class="fab fa-facebook-f"></span>
-                                    </a>
-
-                                    <div class="size-w-3 flex-wr-sb-c">
-                                        <span class="f1-s-8 cl3 p-r-20">
-                                            6879 Fans
-                                        </span>
-
-                                        <a href="#" class="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                            Like
-                                        </a>
-                                    </div>
-                                </li>
-
-                                <li class="flex-wr-sb-c p-b-20">
-                                    <a href="#"
-                                        class="size-a-8 flex-c-c borad-3 size-a-8 bg-twitter fs-16 cl0 hov-cl0">
-                                        <span class="fab fa-twitter"></span>
-                                    </a>
-
-                                    <div class="size-w-3 flex-wr-sb-c">
-                                        <span class="f1-s-8 cl3 p-r-20">
-                                            568 Followers
-                                        </span>
-
-                                        <a href="#" class="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                            Follow
-                                        </a>
-                                    </div>
-                                </li>
-
-                                <li class="flex-wr-sb-c p-b-20">
-                                    <a href="#"
-                                        class="size-a-8 flex-c-c borad-3 size-a-8 bg-youtube fs-16 cl0 hov-cl0">
-                                        <span class="fab fa-youtube"></span>
-                                    </a>
-
-                                    <div class="size-w-3 flex-wr-sb-c">
-                                        <span class="f1-s-8 cl3 p-r-20">
-                                            5039 Subscribers
-                                        </span>
-
-                                        <a href="#" class="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                            Subscribe
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
+                {{-- SideBar --}}
+                <div class="col-md-10 col-lg-4 p-b-30">
+                    <div class="p-l-10 p-rl-0-sr991 p-t-33">
                         <!-- Most Popular -->
                         <div class="p-b-30">
                             <div class="how2 how2-cl4 flex-s-c">
@@ -315,26 +301,6 @@
                             </div>
                         </div>
 
-                        <!-- Subscribe -->
-                        <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">
-                            <h5 class="f1-m-5 cl0 p-b-10">
-                                Subscribe
-                            </h5>
-
-                            <p class="f1-s-1 cl0 p-b-25">
-                                Get all latest content delivered to your email a few times a month.
-                            </p>
-
-                            <form class="size-a-9 pos-relative">
-                                <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email"
-                                    placeholder="Email">
-
-                                <button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
-                                    <i class="fa fa-arrow-right"></i>
-                                </button>
-                            </form>
-                        </div>
-
                         <!-- Tag -->
                         <div class="p-b-55">
                             <div class="how2 how2-cl4 flex-s-c m-b-30">
@@ -390,4 +356,40 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('footer')
+    <script>
+        function removeComment(e) {
+            $(e)?.parent()?.parent()?.parent()?.remove();
+        }
+
+        function formComment(id) {
+            return "<div class='bg-light p-2 reply-form'>" +
+                "<form action='{{ route('user.comment') }}' method='post'>" +
+                `@csrf` +
+                `<input type='hidden' name='parent_id' value='` + id + `'>` +
+                `<input type='hidden' name='post_id' value='{{ $post->id }}'>` +
+                "<div class='d-flex flex-row align-items-start'>" +
+                "<div><img class='rounded-circle' src='{{ auth('user')->user()->avatar }}' width='40'></div>" +
+                "<div class='d-flex flex-column justify-content-start ml-2 w-100'>" +
+                "<p class='d-block font-weight-bold name'>{{ auth()->user()->name }}</p>" +
+                "<textarea class='form-control shadow-none textarea' name='content' placeholder='...Nhập bình luận...'></textarea>" +
+                "</div></div>" +
+                "<div class='mt-2 text-right'>" +
+                "<button type='submit' class='btn btn-primary btn-sm shadow-none' type='button'>Bình luận</button>" +
+                "<div onClick='removeComment(this)' class='btn btn-danger btn-sm ml-1 shadow-none'>Cancel</div>" +
+                "</div></form></div>";
+        }
+
+
+        $(document).ready(function() {
+            $('.reply-btn').click(function() {
+                let replyId = $(this).data('replyId');
+                let parent = $(this).parent().parent();
+                $('.comment-section').find("div.reply-form").remove();
+                parent.append(formComment(replyId));
+            });
+        });
+    </script>
 @endsection
