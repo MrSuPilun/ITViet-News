@@ -5,6 +5,7 @@ namespace App\Models;
 // use App\Models\Admin;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/p', [HomeController::class, 'news'])->name('post');
+
+Route::get('search-tag', [SearchController::class, 'searchTagByTitle'])->name('searchTag');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/user.php';

@@ -11,7 +11,7 @@ class Tag extends Model
 
     protected $fillable = ['title', 'content'];
 
-    protected $hidden = ['id', 'updated_at', 'deleted_at'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     public function posts()
     {
