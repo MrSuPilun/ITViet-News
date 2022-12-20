@@ -253,7 +253,7 @@
                                         <h4 class="font-weight-bold">
                                             @switch($profile->role)
                                                 @case(0)
-                                                    Administrator
+                                                    Quản trị viên
                                                 @break
 
                                                 @default
@@ -268,12 +268,10 @@
                             </li>
                             <li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">My Profile</a>
-                                <a class="dropdown-item" href="#">Edit Profile</a>
+                                <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+                                <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Account Setting</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a>
+                                <a class="dropdown-item" href="{{ route('admin.logout') }}">Đăng xuất</a>
                             </li>
                         </div>
                     </ul>

@@ -4,14 +4,9 @@
         <div class="topbar">
             <div class="content-topbar container h-100">
                 <div class="left-topbar">
-                    <a href="#" class="left-topbar-item">
-                        About
-                    </a>
+                </div>
 
-                    <a href="#" class="left-topbar-item">
-                        Contact
-                    </a>
-
+                <div class="right-topbar">
                     @auth('user')
                         <a href="{{ route('user.profile') }}" class="left-topbar-item">
                             {{ auth('user')->user()->name }}
@@ -25,29 +20,6 @@
                             Log in
                         </a>
                     @endauth
-
-                </div>
-
-                <div class="right-topbar">
-                    <a href="#">
-                        <span class="fab fa-facebook-f"></span>
-                    </a>
-
-                    <a href="#">
-                        <span class="fab fa-twitter"></span>
-                    </a>
-
-                    <a href="#">
-                        <span class="fab fa-pinterest-p"></span>
-                    </a>
-
-                    <a href="#">
-                        <span class="fab fa-vimeo-v"></span>
-                    </a>
-
-                    <a href="#">
-                        <span class="fab fa-youtube"></span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -128,11 +100,11 @@
 
             <ul class="main-menu-m">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="/">Trang chủ</a>
                 </li>
 
                 <li>
-                    <a href="category-01.html">News</a>
+                    <a href="category-01.html">Tin tức</a>
                 </li>
 
                 <li>
@@ -180,11 +152,11 @@
 
                     <ul class="main-menu justify-content-center">
                         <li class="main-menu-active">
-                            <a href="index.html">Home</a>
+                            <a href="/">Trang chủ</a>
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-01.html">News</a>
+                            <a href="category-01.html">Tin tức</a>
                         </li>
 
                         <li class="mega-menu-item">
@@ -208,7 +180,7 @@
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="#">Features</a>
+                            <a href="#">Liên hệ</a>
                         </li>
                     </ul>
                 </nav>
