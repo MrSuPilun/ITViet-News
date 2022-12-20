@@ -17,10 +17,6 @@
             font-size: 11px
         }
 
-        /* .comment-text {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        font-size: 12px
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } */
-
         .fs-12 {
             font-size: 12px
         }
