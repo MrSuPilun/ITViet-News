@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         Auth::guard('user')->logout();
 
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
