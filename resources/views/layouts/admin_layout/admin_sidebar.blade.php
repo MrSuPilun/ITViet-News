@@ -5,7 +5,7 @@
                 <li class="nav-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                     <a class="collapsed" href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-home"></i>
-                        <p>Dashboard</p>
+                        <p>Bảng điều khiển</p>
                     </a>
                 </li>
                 <li class="nav-section">
@@ -17,24 +17,19 @@
                 <li class="nav-item {{ request()->is('admin/base*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
-                        <p>Base</p>
+                        <p>Bài viết</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse {{ request()->is('admin/base*') ? 'show' : '' }}" id="base">
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->is('admin/base/new-post') ? 'active' : '' }}">
                                 <a href="{{ route('admin.newPost') }}">
-                                    <span class="sub-item">Create New Post</span>
+                                    <span class="sub-item">Tạo bài viết mới</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="sub-item">Create New Staff</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/notifications.html">
-                                    <span class="sub-item">Notifications</span>
+                                    <span class="sub-item">Tất cả bài viết</span>
                                 </a>
                             </li>
                         </ul>
@@ -43,7 +38,7 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#sidebarLayouts">
                         <i class="fas fa-th-list"></i>
-                        <p>Sidebar Layouts</p>
+                        <p>Tùy chỉnh giao diện</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="sidebarLayouts">
@@ -59,19 +54,24 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#tables">
                         <i class="fas fa-table"></i>
-                        <p>Tables</p>
+                        <p>Bảng dữ liệu</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="tables">
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="#">
-                                    <span class="sub-item">User</span>
+                                    <span class="sub-item">Thẻ bài viết</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="sub-item">Manager</span>
+                                    <span class="sub-item">Người dùng</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Quản lý</span>
                                 </a>
                             </li>
                         </ul>
@@ -80,7 +80,7 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#charts">
                         <i class="far fa-chart-bar"></i>
-                        <p>Charts</p>
+                        <p>Thống kê</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="charts">
