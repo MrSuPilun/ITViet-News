@@ -52,4 +52,10 @@ class PostController extends Controller
 
         return redirect()->route('admin.login');
     }
+
+    public function showPosts()
+    {
+        $posts = Post::paginate(5);
+        return view('admin.admin_show_post', compact('posts'));
+    }
 }

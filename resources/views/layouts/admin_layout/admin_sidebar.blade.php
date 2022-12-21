@@ -27,8 +27,8 @@
                                     <span class="sub-item">Tạo bài viết mới</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
+                            <li class="{{ request()->is('admin/base/show-post') ? 'active' : '' }}">
+                                <a href="{{ route('admin.showPost') }}">
                                     <span class="sub-item">Tất cả bài viết</span>
                                 </a>
                             </li>

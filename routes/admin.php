@@ -8,6 +8,7 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
         Route::get('logout', 'AdminController@logout')->name('admin.logout');
         Route::prefix('base')->group(function () {
             Route::match(['GET', 'POST'], 'new-post', 'PostController@newPost')->name('admin.newPost');
+            Route::get('show-post', 'PostController@showPosts')->name('admin.showPost');
         });
     });
 });
