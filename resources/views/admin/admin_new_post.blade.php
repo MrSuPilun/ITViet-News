@@ -56,8 +56,9 @@
                                         aria-describedby="helpId" placeholder="Nhập tiêu đề" maxlength="75"
                                         value="{{ old('title') }}">
                                     @error('title')
-                                        <small id="helpId"
-                                            class="form-text text-muted text-danger">{{ $message }}</small>
+                                        <small id="helpId" class="form-text text-muted text-danger">
+                                            {{ $message }}
+                                        </small>
                                     @enderror
                                 </div>
                                 <div class="form-group @error('summary') has-error @enderror">
@@ -65,8 +66,9 @@
                                     <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="Nhập tóm tắt" maxlength="255"
                                         value="{{ old('summary') }}"></textarea>
                                     @error('summary')
-                                        <small id="helpId"
-                                            class="form-text text-muted text-danger">{{ $message }}</small>
+                                        <small id="helpId" class="form-text text-muted text-danger">
+                                            {{ $message }}
+                                        </small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
@@ -76,7 +78,7 @@
                                             <span class="input-group-btn">
                                                 <a id="lfm" data-input="thumbnail" data-preview="holder"
                                                     class="btn btn-primary text-white font-weight-bold">
-                                                    <i class="fa fa-image"></i> Nhập
+                                                    <i class="fa fa-image"></i>Nhập
                                                 </a>
                                             </span>
                                             <input id="thumbnail" class="form-control" type="text" name="thumbnail"
