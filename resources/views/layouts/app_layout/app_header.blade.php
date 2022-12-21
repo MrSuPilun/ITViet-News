@@ -9,15 +9,16 @@
                 <div class="right-topbar">
                     @auth('user')
                         <a href="{{ route('user.profile') }}" class="left-topbar-item">
+                            <i class="fa fa-user mr-2" aria-hidden="true"></i>
                             {{ auth('user')->user()->name }}
                         </a>
                     @else
                         <a href="{{ route('user.register') }}" class="left-topbar-item">
-                            Sing up
+                            Sign up
                         </a>
 
                         <a href="{{ route('login') }}" class="left-topbar-item">
-                            Log in
+                            Sign in
                         </a>
                     @endauth
                 </div>
@@ -43,58 +44,20 @@
         <div class="menu-mobile">
             <ul class="topbar-mobile">
                 <li class="left-topbar">
-                    <span class="left-topbar-item flex-wr-s-c">
-                        <span>
-                            New York, NY
-                        </span>
+                    @auth('user')
+                        <a href="{{ route('user.profile') }}" class="left-topbar-item">
+                            <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                            {{ auth('user')->user()->name }}
+                        </a>
+                    @else
+                        <a href="{{ route('user.register') }}" class="left-topbar-item">
+                            Sing up
+                        </a>
 
-                        <img class="m-b-1 m-rl-8" src="{{ asset('assets/app/images/icons/icon-night.png') }}"
-                            alt="IMG">
-
-                        <span>
-                            HI 58° LO 56°
-                        </span>
-                    </span>
-                </li>
-
-                <li class="left-topbar">
-                    <a href="#" class="left-topbar-item">
-                        About
-                    </a>
-
-                    <a href="#" class="left-topbar-item">
-                        Contact
-                    </a>
-
-                    <a href="#" class="left-topbar-item">
-                        Sing up
-                    </a>
-
-                    <a href="#" class="left-topbar-item">
-                        Log in
-                    </a>
-                </li>
-
-                <li class="right-topbar">
-                    <a href="#">
-                        <span class="fab fa-facebook-f"></span>
-                    </a>
-
-                    <a href="#">
-                        <span class="fab fa-twitter"></span>
-                    </a>
-
-                    <a href="#">
-                        <span class="fab fa-pinterest-p"></span>
-                    </a>
-
-                    <a href="#">
-                        <span class="fab fa-vimeo-v"></span>
-                    </a>
-
-                    <a href="#">
-                        <span class="fab fa-youtube"></span>
-                    </a>
+                        <a href="{{ route('login') }}" class="left-topbar-item">
+                            Log in
+                        </a>
+                    @endauth
                 </li>
             </ul>
 
@@ -108,23 +71,23 @@
                 </li>
 
                 <li>
-                    <a href="category-02.html">Entertainment </a>
+                    <a href="category-02.html">Sản phẩm</a>
                 </li>
 
                 <li>
-                    <a href="category-01.html">Business</a>
+                    <a href="category-01.html">Trò chơi</a>
                 </li>
 
                 <li>
-                    <a href="category-02.html">Travel</a>
+                    <a href="category-02.html">Cuộc thi</a>
                 </li>
 
                 <li>
-                    <a href="category-01.html">Life Style</a>
+                    <a href="category-01.html">Blockchain</a>
                 </li>
 
                 <li>
-                    <a href="category-02.html">Video</a>
+                    <a href="category-02.html">AI</a>
                 </li>
 
                 <li>
@@ -160,23 +123,23 @@
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-02.html">Entertainment </a>
+                            <a href="category-02.html">Sản phẩm </a>
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-01.html">Business</a>
+                            <a href="category-01.html">Trò chơi</a>
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-02.html">Travel</a>
+                            <a href="category-02.html">Cuộc thi</a>
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-01.html">Life Style</a>
+                            <a href="category-01.html">Blockchain</a>
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-02.html">Video</a>
+                            <a href="category-02.html">AI</a>
                         </li>
 
                         <li class="mega-menu-item">

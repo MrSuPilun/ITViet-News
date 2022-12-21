@@ -1,7 +1,7 @@
 var editor_config = {
     path_absolute: "/",
     selector: "textarea.tinymce",
-    height: 350,
+    height: 500,
     relative_urls: false,
     branding: false, // Remove logo tiny
     plugins: [

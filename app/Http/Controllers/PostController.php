@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostTag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -35,7 +36,17 @@ class PostController extends Controller
 
                 $post->save();
 
-                dd($post);
+                if ($request->has('tags')) {
+                    $tags = explode(' ', $request->tags);
+                    foreach ($tags as $t) {
+                        PostTag::create([
+                            'post_id' => $post->id,
+                            'tag_id' => $t
+                        ])->save();
+                    }
+                }
+
+                return redirect()->route('admin.dashboard');
             }
         }
 
