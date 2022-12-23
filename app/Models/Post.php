@@ -10,7 +10,9 @@ class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['author_id', 'title', 'content'];
+    protected $guarded = [];
+
+    protected $fillable = ['author_id', 'title', 'content', 'summary'];
 
     public function author()
     {
@@ -29,6 +31,6 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'post_tags', 'tag_id', 'post_id');
+        return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
     }
 }

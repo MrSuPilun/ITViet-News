@@ -249,9 +249,9 @@
                                     <div class="avatar-lg"><img src="{{ asset('assets/dashboard/img/profile.jpg') }}"
                                             alt="image profile" class="avatar-img rounded"></div>
                                     <div class="u-text">
-                                        <h4>{{ $profile->name }}</h4>
+                                        <h4>{{ auth('admin')->user()->name }}</h4>
                                         <h4 class="font-weight-bold">
-                                            @switch($profile->role)
+                                            @switch(auth('admin')->user()->role)
                                                 @case(0)
                                                     Quản trị viên
                                                 @break
@@ -260,7 +260,7 @@
                                                     Viewer
                                             @endswitch
                                         </h4>
-                                        <p class="text-muted">{{ $profile->email }}</p>
+                                        <p class="text-muted">{{ auth('admin')->user()->email }}</p>
                                         {{-- <a href="profile.html"
                                             class="btn btn-xs btn-secondary btn-sm">View Profile</a> --}}
                                     </div>
