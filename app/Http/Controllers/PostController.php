@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         if ($request->isMethod('GET')) {
             if (auth('admin')->check()) {
-                return view('admin.admin_new_post', ['profile' => auth('admin')->user()]);
+                return view('admin.post.admin_new_post', ['profile' => auth('admin')->user()]);
             }
         }
 
@@ -61,10 +61,11 @@ class PostController extends Controller
 
     public function showPosts()
     {
-        // $posts = Post::paginate(5);
-        // $posts = Post::all();
-        // return view('admin.admin_show_post', compact('posts'));
-        return view('admin.admin_show_post');
+        if (auth('admin')->check()) {
+            return view('admin.post.admin_show_post');
+        }
+
+        return redirect()->route('admin.login');
     }
 
     public function getPosts(Request $request)
@@ -107,9 +108,9 @@ class PostController extends Controller
                         class="btn btn-link btn-success btn-lg p-2">
                         <i class="fa fa-eye"></i>
                     </a>
-                    <button type="button" class="btn btn-link btn-primary btn-lg p-2">
+                    <a href="' . route('admin.updatePost') . '?id=' . $id . '" class="btn btn-link btn-primary btn-lg p-2">
                         <i class="fa fa-edit"></i>
-                    </button>
+                    </a>
                     <button type="button" class="btn btn-link btn-danger p-2 btn-delete" onClick="deletePost(' . $id . ')">
                         <i class="fa fa-times"></i>
                     </button>
@@ -138,6 +139,63 @@ class PostController extends Controller
     {
         if ($request->has('id')) {
             Post::find($request->id)->delete();
+        }
+    }
+
+    public function updatePost(Request $request)
+    {
+        if ($request->isMethod('GET')) {
+            if (auth('admin')->check()) {
+                if ($request->has('id')) {
+                    $post = Post::find($request->id);
+                    $tags = $post->tags()->get();
+                    $strTag = '';
+                    foreach ($tags as $tag) {
+                        $strTag .= ' ' . $tag->id;
+                    }
+                    return view('admin.post.admin_update_post', compact('post', 'tags', 'strTag'));
+                }
+            }
+        }
+
+        if ($request->isMethod('POST')) {
+            if (auth('admin')->check()) {
+                $data = $request->validate([
+                    'title' => ['required', 'max:75'],
+                    'summary' => ['max:255'],
+                    'content' => ['required']
+                ]);
+                $post = Post::find($request->id);
+                if ($post) {
+                    if (auth('admin')->check()) {
+                        $data = $request->validate([
+                            'title' => ['required', 'max:75'],
+                            'summary' => ['max:255'],
+                            'content' => ['required']
+                        ]);
+
+                        $post->title = $data['title'];
+                        $post->summary = $data['summary'];
+                        $post->content = $data['content'];
+                        $post->thumbnail = $request->thumbnail;
+
+                        $post->save();
+
+                        if ($request->has('tags')) {
+                            $tags = explode(' ', $request->tags);
+                            $post->tags()->sync($tags);
+                        }
+
+
+                        if ($post) {
+                            Alert::success('Cập Nhập Thành Công Bài Viết:', $post->title);
+                        } else {
+                            Alert::error('Lỗi', 'Cập nhập bài viết không thành công');
+                        }
+                        return redirect()->back();
+                    }
+                }
+            }
         }
     }
 }

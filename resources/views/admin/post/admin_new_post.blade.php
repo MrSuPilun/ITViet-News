@@ -162,7 +162,7 @@
             let str = $("input[name='tags']").val();
 
             // Check only one tag select and append badge in view
-            if (!str.includes($(e).data('tagId'))) {
+            if (!str.includes(" " + $(e).data('tagId'))) {
                 $("input[name='tags']").val(function() {
                     return this.value + " " + $(e).data('tagId');
                 });
