@@ -139,7 +139,7 @@
 
                         <div>
                             <h4 class="f1-l-4 cl3 p-b-12">
-                                Leave a Comment
+                                Bình Luận
                             </h4>
 
                             {{-- Comment --}}

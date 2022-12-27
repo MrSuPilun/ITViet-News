@@ -24,38 +24,37 @@
                     <form action="{{ route('admin.updatePost') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="id" value="{{ $post->id }}">
+
                         <div class="card-header">
                             <div class="card-title">Cập nhập bài viết: {{ $post->title }}</div>
                         </div>
+
                         <div class="card-body row">
                             <div class="col-12 ">
                                 <div class="form-group">
                                     <label for="imginput">Gắn thẻ</label>
-                                    <div class="form-control">
-                                        <div class="input-group">
-                                            <div class="dropdown w-100">
-                                                <input type="text" class="form-control" id="search_tag"
-                                                    aria-describedby="helpId" placeholder="Nhập thẻ" maxlength="75"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <input type="hidden" name="tags" value="{{ $strTag }}">
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Không tìm thấy kết quả</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-2 tag-container">
-                                            @foreach ($tags as $tag)
-                                                <span class="badge badge-count mr-2 pr-1">
-                                                    {{ $tag->title }}
-                                                    <i class="fa-sharp fa-solid fa-circle-xmark tag-delete"
-                                                        data-tag-id="{{ $tag->id }}" onclick="deleteBadge(this)"></i>
-                                                </span>
-                                            @endforeach
+
+                                    <div class="dropdown w-100">
+                                        <input type="text" class="form-control" id="search_tag" aria-describedby="helpId"
+                                            placeholder="Nhập thẻ" maxlength="75" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                        <input type="hidden" name="tags" value="{{ $strTag }}">
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Không tìm thấy kết quả</a>
                                         </div>
                                     </div>
+
+                                    <div class="mt-2 tag-container">
+                                        @foreach ($tags as $tag)
+                                            <span class="badge badge-count mr-2 pr-1">
+                                                {{ $tag->title }}
+                                                <i class="fa-sharp fa-solid fa-circle-xmark tag-delete"
+                                                    data-tag-id="{{ $tag->id }}" onclick="deleteBadge(this)"></i>
+                                            </span>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
+
                                 <div class="form-group @error('title') has-error @enderror">
                                     <label for="title">Tiêu đề</label>
                                     <input type="text" class="form-control" name="title" id="title"
@@ -67,6 +66,7 @@
                                         </small>
                                     @enderror
                                 </div>
+
                                 <div class="form-group @error('summary') has-error @enderror">
                                     <label for="summary">Tóm tắt</label>
                                     <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="Nhập tóm tắt" maxlength="255">{{ $post->summary }}</textarea>
@@ -76,23 +76,21 @@
                                         </small>
                                     @enderror
                                 </div>
+
                                 <div class="form-group">
                                     <label for="imginput">Ảnh minh họa</label>
-                                    <div class="form-control">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <a id="lfm" data-input="thumbnail" data-preview="holder"
-                                                    class="btn btn-primary text-white font-weight-bold">
-                                                    <i class="fa fa-image"></i>Nhập
-                                                </a>
-                                            </span>
-                                            <input id="thumbnail" class="form-control" type="text" name="thumbnail"
-                                                placeholder="Đường dẫn" value="{{ $post->thumbnail }}">
-                                        </div>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                                class="btn btn-primary text-white font-weight-bold">
+                                                <i class="fa fa-image"></i> Nhập
+                                            </a>
+                                        </span>
+                                        <input id="thumbnail" class="form-control" type="text" name="thumbnail"
+                                            placeholder="Đường dẫn" value="{{ $post->thumbnail }}">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-9">
+
                                 <div class="form-group @error('content') has-error @enderror">
                                     <label for="editor">Nội dung</label>
                                     <textarea class="form-control tinymce" id="editor" name="content">{{ $post->content }}</textarea>
