@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Login</title>
+    <title>Đăng Nhập Admin</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -36,8 +36,8 @@
 <body class="hold-transition login-page">
     @auth('admin')
         <div class="login-box" style="text-align: center; width: 100%;">
-            <h3>Please <a href="{{ route('admin.logout') }}"><u>log out</u></a> your account. Return <a
-                    href="{{ route('admin.dashboard') }}"><u>dashboard</u></a>.</h3>
+            <h3>Vui lòng <a href="{{ route('admin.logout') }}"><u>đăng xuất</u></a> tài khoản của bạn. Trở lại <a
+                    href="{{ route('admin.dashboard') }}"><u>trang quản lý</u></a>.</h3>
         </div>
     @else
         <div class="login-box">
@@ -47,7 +47,7 @@
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
+                    <p class="login-box-msg">Đăng nhập để bắt đầu làm việc</p>
 
                     <form action="{{ route('admin.login') }}" method="post">
                         @csrf
@@ -69,7 +69,7 @@
                         <div class="input-group mb-3">
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1"
-                                placeholder="Password" aria-describedby="exampleInputPassword1-error">
+                                placeholder="Mật khẩu" aria-describedby="exampleInputPassword1-error">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -82,17 +82,17 @@
                             @enderror
                         </div>
                         <div class="row">
-                            <div class="col-8">
+                            <div class="col-6">
                                 <div class="icheck-primary">
                                     <input type="checkbox" id="remember" name="remember">
                                     <label for="remember">
-                                        Remember Me
+                                        Ghi nhớ
                                     </label>
                                 </div>
                             </div>
                             <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                             </div>
                             <!-- /.col -->
                         </div>

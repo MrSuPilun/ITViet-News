@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         if ($request->isMethod('GET')) {
             if (auth('admin')->check()) {
-                return view('admin.post.admin_new_post', ['profile' => auth('admin')->user()]);
+                return view('admin.post.admin_new_post');
             }
         }
 

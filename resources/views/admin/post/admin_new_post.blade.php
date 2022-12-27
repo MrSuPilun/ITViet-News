@@ -30,26 +30,22 @@
                             <div class="col-12 ">
                                 <div class="form-group">
                                     <label for="imginput">Gắn thẻ</label>
-                                    <div class="form-control">
-                                        <div class="input-group">
-                                            <div class="dropdown w-100">
-                                                <input type="text" class="form-control" id="search_tag"
-                                                    aria-describedby="helpId" placeholder="Nhập thẻ" maxlength="75"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <input type="hidden" name="tags" value="">
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Không tìm thấy kết quả</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-2 tag-container">
 
+                                    <div class="dropdown w-100">
+                                        <input type="text" class="form-control" id="search_tag" aria-describedby="helpId"
+                                            placeholder="Nhập thẻ" maxlength="75" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                        <input type="hidden" name="tags" value="">
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Không tìm thấy kết quả</a>
                                         </div>
                                     </div>
 
+                                    <div class="mt-2 tag-container">
+                                        {{-- TAGS --}}
+                                    </div>
+
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
                                 <div class="form-group @error('title') has-error @enderror">
                                     <label for="title">Tiêu đề</label>
                                     <input type="text" class="form-control" name="title" id="title"
@@ -73,21 +69,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="imginput">Ảnh minh họa</label>
-                                    <div class="form-control">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <a id="lfm" data-input="thumbnail" data-preview="holder"
-                                                    class="btn btn-primary text-white font-weight-bold">
-                                                    <i class="fa fa-image"></i>Nhập
-                                                </a>
-                                            </span>
-                                            <input id="thumbnail" class="form-control" type="text" name="thumbnail"
-                                                placeholder="Đường dẫn">
-                                        </div>
+
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                                class="btn btn-primary text-white font-weight-bold">
+                                                <i class="fa fa-image"></i> Nhập
+                                            </a>
+                                        </span>
+                                        <input id="thumbnail" class="form-control" type="text" name="thumbnail"
+                                            placeholder="Đường dẫn">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-9">
                                 <div class="form-group @error('content') has-error @enderror">
                                     <label for="editor">Nội dung</label>
                                     <textarea class="form-control tinymce" id="editor" name="content">{{ old('content') }}</textarea>

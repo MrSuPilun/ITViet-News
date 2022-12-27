@@ -60,22 +60,22 @@
                                 <span class="f1-s-3 cl8 m-r-15">
                                     {{-- Author --}}
                                     <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-                                        by {{ $post->author()->first()->name }}
+                                        Tác giả: {{ $post->author()->first()->name }}
                                     </a>
 
                                     <span class="m-rl-3">-</span>
                                     {{-- Time --}}
                                     <span>
-                                        {{ $post->created_at }}
+                                        {{ diffInTime($post->created_at) }}
                                     </span>
                                 </span>
                                 {{-- Views --}}
                                 <span class="f1-s-3 cl8 m-r-15">
-                                    {{ $post->view }} Views
+                                    {{ $post->view }} Lượt xem
                                 </span>
 
                                 <a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
-                                    0 Comment
+                                    {{ $post->comments()->get()->count() }} Bình luận
                                 </a>
                             </div>
                             {{-- Thumbnail --}}
@@ -89,22 +89,20 @@
                             <!-- Tag -->
                             <div class="flex-s-s p-t-12 p-b-15">
                                 <span class="f1-s-12 cl5 m-r-8">
-                                    Tags:
+                                    Thẻ:
                                 </span>
 
                                 <div class="flex-wr-s-s size-w-0">
-                                    <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-                                        Streetstyle
-                                    </a>
-
-                                    <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-                                        Crafts
-                                    </a>
+                                    @foreach ($post->tags()->get() as $tag)
+                                        <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
+                                            {{ $tag->title }}
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
 
                             <!-- Share -->
-                            <div class="flex-s-s">
+                            {{-- <div class="flex-s-s">
                                 <span class="f1-s-12 cl5 p-t-1 m-r-15">
                                     Share:
                                 </span>
@@ -134,14 +132,14 @@
                                         Pinterest
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <!-- Leave a comment -->
 
                         <div>
                             <h4 class="f1-l-4 cl3 p-b-12">
-                                Leave a Comment
+                                Bình Luận
                             </h4>
 
                             {{-- Comment --}}
@@ -174,7 +172,7 @@
                                     </div>
                                 @else
                                     <p class="f1-s-13 cl8 p-b-40">
-                                        Please <a href="{{ route('login') }}">login</a> before commenting
+                                        Vui lòng <a href="{{ route('login') }}">đăng nhập</a> trước khi bình luận
                                     </p>
                                 @endauth
                             </div>
@@ -190,7 +188,7 @@
                         <div class="p-b-30">
                             <div class="how2 how2-cl4 flex-s-c">
                                 <h3 class="f1-m-2 cl3 tab01-title">
-                                    Most Popular
+                                    Bài viết nổi bật
                                 </h3>
                             </div>
 
@@ -301,7 +299,7 @@
                         <div class="p-b-55">
                             <div class="how2 how2-cl4 flex-s-c m-b-30">
                                 <h3 class="f1-m-2 cl3 tab01-title">
-                                    Tags
+                                    Truy Cập Nhiều Nhất
                                 </h3>
                             </div>
 

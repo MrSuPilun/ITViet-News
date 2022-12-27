@@ -39,6 +39,11 @@
                                     <span class="sub-item">Tất cả bài viết</span>
                                 </a>
                             </li>
+                            <li class="{{ request()->is('admin/base/show-trash-post') ? 'active' : '' }}">
+                                <a href="{{ route('admin.showTrashPost') }}">
+                                    <span class="sub-item">Thùng rác</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

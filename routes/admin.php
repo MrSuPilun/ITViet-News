@@ -14,6 +14,11 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
             Route::get('get-post', 'PostController@getPosts')->name('admin.getPost');
 
             Route::post('delete-post', 'PostController@deletePost')->name('admin.deletePost');
+
+            Route::get('show-trash-post', 'TrashPostController@showTrashPosts')->name('admin.showTrashPost');
+            Route::get('get-trash-post', 'TrashPostController@getTrashPosts')->name('admin.getTrashPost');
+            Route::post('delete-trash-post', 'TrashPostController@deleteTrashPost')->name('admin.deleteTrashPost');
+            Route::post('restore-trash-post', 'TrashPostController@restoreTrashPost')->name('admin.restoreTrashPost');
         });
     });
 });
