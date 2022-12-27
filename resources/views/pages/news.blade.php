@@ -93,13 +93,11 @@
                                 </span>
 
                                 <div class="flex-wr-s-s size-w-0">
-                                    <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-                                        Streetstyle
-                                    </a>
-
-                                    <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-                                        Crafts
-                                    </a>
+                                    @foreach ($post->tags()->get() as $tag)
+                                        <a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
+                                            {{ $tag->title }}
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
 
