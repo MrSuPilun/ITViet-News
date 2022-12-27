@@ -14,6 +14,9 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
             Route::get('get-post', 'PostController@getPosts')->name('admin.getPost');
 
             Route::post('delete-post', 'PostController@deletePost')->name('admin.deletePost');
+
+            Route::match(['GET', 'POST'], 'trash-post', 'TrashPostController@trashPost')->name('admin.trashPost');
+            Route::get('get-trash-post', 'TrashPostController@getTrashPosts')->name('admin.getTrashPost');
         });
     });
 });
