@@ -14,11 +14,11 @@
                         </a>
                     @else
                         <a href="{{ route('user.register') }}" class="left-topbar-item">
-                            Sign up
+                            Đăng ký
                         </a>
 
                         <a href="{{ route('login') }}" class="left-topbar-item">
-                            Sign in
+                            Đăng nhập
                         </a>
                     @endauth
                 </div>
@@ -51,11 +51,11 @@
                         </a>
                     @else
                         <a href="{{ route('user.register') }}" class="left-topbar-item">
-                            Sing up
+                            Đăng ký
                         </a>
 
                         <a href="{{ route('login') }}" class="left-topbar-item">
-                            Log in
+                            Đăng nhập
                         </a>
                     @endauth
                 </li>
