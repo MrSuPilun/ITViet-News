@@ -106,6 +106,7 @@
                         "next": "Tiếp",
                         "previous": "Trước"
                     },
+                    "emptyTable": "Không có dữ liệu trong bảng",
                     processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>',
                 }
             });
@@ -123,7 +124,7 @@
 
             swalWithBootstrapButtons.fire({
                 title: 'Bạn có muốn xóa bài viết này?',
-                text: "Bạn sẽ không hoàn lại điều này!",
+                text: "Bài viết sẽ được chuyển đến thùng rác!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Có',

@@ -15,52 +15,23 @@
                                     <tr>
                                         <th scope="col" style="width: 20px;">#</th>
                                         <th scope="col">Tiêu đề</th>
-                                        <th scope="col" style="width: 50px;">Ngày tạo</th>
+                                        <th scope="col" style="width: 50px;">Ngày xóa</th>
                                         <th scope="col" style="width: 100px">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($posts as $post)
-                                        <tr>
-                                            <td>{{ $post->id }}</td>
-                                            <td>{{ $post->title }}</td>
-                                            <td>{{ $post->created_at }}</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button" data-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-primary btn-lg"
-                                                        data-original-title="Edit Task">
-                                                        <i class="fa fa-eye"></i>
-                                                    </button>
-                                                    <button type="button" data-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-primary btn-lg"
-                                                        data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" data-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-danger" data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach --}}
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th scope="col" style="width: 20px;">#</th>
                                         <th scope="col">Tiêu đề</th>
-                                        <th scope="col" style="width: 50px;">Ngày tạo</th>
+                                        <th scope="col" style="width: 50px;">Ngày xóa</th>
                                         <th scope="col" style="width: 100px">Chức năng</th>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
-                    {{-- Phân trang thủ công --}}
-                    {{-- <div class="card-action">
-                        {{ $posts->links('template.pagination') }}
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -106,6 +77,7 @@
                         "next": "Tiếp",
                         "previous": "Trước"
                     },
+                    "emptyTable": "Không có dữ liệu trong bảng",
                     processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>',
                 }
             });
@@ -133,7 +105,7 @@
                 if (result.isConfirmed) {
 
                     $.ajax({
-                        url: "{{ route('admin.deletePost') }}",
+                        url: "{{ route('admin.deleteTrashPost') }}",
                         type: 'post',
                         data: {
                             "_token": "{{ csrf_token() }}",
@@ -156,6 +128,58 @@
                     swalWithBootstrapButtons.fire(
                         'Đã hủy!',
                         'Không xóa bài viết này :)',
+                        'error'
+                    )
+                }
+            })
+
+        }
+
+        // Handle restore Post
+        function restorePost(id) {
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Bạn có muốn khôi phục bài viết này?',
+                text: "Bạn sẽ không hoàn lại điều này!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "{{ route('admin.restoreTrashPost') }}",
+                        type: 'post',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "id": id,
+                        },
+                        success: function() {
+                            swalWithBootstrapButtons.fire(
+                                'Thành công!',
+                                'Khôi phục thành công!',
+                                'success'
+                            )
+                            $('#basic-datatables').DataTable().ajax.reload();
+                        }
+                    });
+
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Đã hủy!',
+                        'Không khôi phục bài viết này :)',
                         'error'
                     )
                 }

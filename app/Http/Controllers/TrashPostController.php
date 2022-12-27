@@ -7,15 +7,26 @@ use Illuminate\Http\Request;
 
 class TrashPostController extends Controller
 {
-    public function trashPost(Request $request)
+    public function showTrashPosts()
     {
-        if ($request->isMethod('POST')) {
-        }
-
         if (auth('admin')->check())
             return view('admin.post.admin_trash_post');
 
         return redirect()->route('admin.login');
+    }
+
+    public function deleteTrashPost(Request $request)
+    {
+        if ($request->has('id')) {
+            Post::onlyTrashed()->find($request->id)->forceDelete();
+        }
+    }
+
+    public function restoreTrashPost(Request $request)
+    {
+        if ($request->has('id')) {
+            Post::onlyTrashed()->find($request->id)->restore();
+        }
     }
 
     public function getTrashPosts(Request $request)
@@ -51,16 +62,12 @@ class TrashPostController extends Controller
         foreach ($records as $record) {
             $id = $record->id;
             $title = $record->title;
-            $created_at = $record->created_at;
+            $created_at = $record->deleted_at;
             // Action
             $action = '<div class="form-button-action">
-                    <a href="' . route('post') . '?id=' . $id . '" target="_blank"
-                        class="btn btn-link btn-success btn-lg p-2">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <a href="' . route('admin.updatePost') . '?id=' . $id . '" class="btn btn-link btn-primary btn-lg p-2">
-                        <i class="fa fa-edit"></i>
-                    </a>
+                    <button type="button" class="btn btn-link p-2 btn-delete" onClick="restorePost(' . $id . ')">
+                        <i class="fas fa-undo-alt"></i>
+                    </button>
                     <button type="button" class="btn btn-link btn-danger p-2 btn-delete" onClick="deletePost(' . $id . ')">
                         <i class="fa fa-times"></i>
                     </button>
