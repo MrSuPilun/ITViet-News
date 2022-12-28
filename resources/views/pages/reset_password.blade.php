@@ -7,26 +7,16 @@
                 <div class="col-md-7 col-lg-5">
                     <div class="login-wrap p-4 p-md-5">
                         <h3 class="text-center mb-4">
-                            Đăng Ký
+                            Đổi Mật Khẩu
                         </h3>
-                        <form action="{{ route('user.register') }}" class="login-form" method="post">
+                        <form action="{{ route('user.resetPassword', ['token' => $token]) }}" class="login-form"
+                            method="post">
                             @csrf
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control rounded-left" placeholder="Họ và Tên"
-                                        name="name" required>
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                @error('name')
-                                    <label class="text-danger small">{{ $message }}</label>
-                                @enderror
-                            </div>
+                            <input type="hidden" name="token" value="{{ $token }}">
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" class="form-control rounded-left" placeholder="Email"
-                                        name="email" required>
+                                        name="email" value="{{ $email }}" readonly>
                                     <div class="input-group-addon">
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </div>
@@ -37,7 +27,7 @@
                             </div>
                             <div class="form-group d-flex">
                                 <div class="input-group" id="show_hide_password">
-                                    <input type="password" class="form-control rounded-left" placeholder="Mật khẩu"
+                                    <input type="password" class="form-control rounded-left" placeholder="Mật khẩu mới"
                                         name="password" required>
                                     <div class="input-group-addon">
                                         <a><i class="fa fa-lock" aria-hidden="true"></i></a>
@@ -62,15 +52,15 @@
                             <div class="form-group">
                                 <button type="submit"
                                     class="form-control btn btn-primary btn-block rounded submit px-3 disabled">
-                                    Đăng ký
+                                    Đổi Mật Khẩu
                                 </button>
                             </div>
                             <div class="form-group d-md-flex">
                                 <div class="w-50 text-md-left">
-                                    <a href="{{ route('login') }}">Đăng nhập</a>
+                                    <a href="{{ route('user.register') }}">Đăng ký</a>
                                 </div>
                                 <div class="w-50 text-md-right">
-                                    <a href="{{ route('user.forgotPassword') }}">Quên mật khẩu?</a>
+                                    <a href="{{ route('login') }}">Đăng nhập</a>
                                 </div>
                             </div>
                         </form>
@@ -80,7 +70,6 @@
         </div>
     </section>
 @endsection
-
 
 @section('footer')
     <script>
