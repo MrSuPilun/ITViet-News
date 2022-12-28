@@ -63,16 +63,16 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('admin/table*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#tables">
                         <i class="fas fa-table"></i>
                         <p>Bảng dữ liệu</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="tables">
+                    <div class="collapse {{ request()->is('admin/table*') ? 'show' : '' }}" id="tables">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="#">
+                            <li class="{{ request()->is('admin/table/tag*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.showTag') }}">
                                     <span class="sub-item">Thẻ bài viết</span>
                                 </a>
                             </li>
