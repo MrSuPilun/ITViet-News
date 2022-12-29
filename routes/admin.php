@@ -28,6 +28,7 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
                 Route::get('get-tag', 'TagController@getTags')->name('admin.getTag');
                 Route::post('delete-tag', 'TagController@deleteTag')->name('admin.deleteTag');
                 Route::post('new-tag', 'TagController@newTag')->name('admin.newTag');
+                Route::match(['GET', 'POST'], 'update-tag', 'TagController@updateTag')->name('admin.updateTag');
             });
         });
     });

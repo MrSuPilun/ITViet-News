@@ -136,6 +136,61 @@
             })
         }
 
+        function updateTag(id) {
+            console.log(id);
+            $.ajax({
+                url: "{{ route('admin.updateTag') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id": id
+                },
+                success: function(data) {
+                    Swal.fire({
+                        title: 'Cập nhập thẻ nội dung',
+                        html: '<input class="swal2-input mx-0 w-100" name="title" placeholder="Tiêu đề" value="' +
+                            data['title'] + '">' +
+                            '<textarea class="swal2-textarea mx-0 w-100" name="content" placeholder="Mô tả">' +
+                            data['content'] + '</textarea>',
+                        showCancelButton: true,
+                        confirmButtonText: 'Cập nhập',
+                        cancelButtonText: 'Hủy',
+                        showLoaderOnConfirm: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            $.ajax({
+                                url: "{{ route('admin.updateTag') }}",
+                                type: 'post',
+                                data: {
+                                    "_token": "{{ csrf_token() }}",
+                                    "id": data['id'],
+                                    "title": $('input[name=title]').val(),
+                                    "content": $('textarea[name=content]').val(),
+                                },
+                                success: function(result) {
+                                    Swal.fire(
+                                        'Thành công!',
+                                        'Cập nhập thành công thẻ: ' + result['message'],
+                                        'success'
+                                    )
+                                    $('#basic-datatables').DataTable().ajax.reload();
+                                },
+                                error: function(xhr, ajaxOptions, thrownError) {
+                                    Swal.fire(
+                                        'Thất bại!',
+                                        'Kiểm tra lại các trường nhập :)',
+                                        'error'
+                                    );
+                                }
+                            });
+
+                        }
+                    })
+                },
+            });
+
+        }
+
         // Handle delete Tag
         function deleteTag(id) {
 

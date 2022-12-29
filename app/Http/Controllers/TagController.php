@@ -53,9 +53,9 @@ class TagController extends Controller
             $created_at = $record->created_at;
             // Action
             $action = '<div class="form-button-action">
-                    <a href="' . route('admin.updatePost') . '?id=' . $id . '" class="btn btn-link btn-primary btn-lg p-2">
-                        <i class="fa fa-edit"></i>
-                    </a>
+                    <button type="button" class="btn btn-link btn-primary p-2 btn-delete" onClick="updateTag(' . $id . ')">
+                    <i class="fa fa-edit"></i>
+                    </button>
                     <button type="button" class="btn btn-link btn-danger p-2 btn-delete" onClick="deleteTag(' . $id . ')">
                         <i class="fa fa-times"></i>
                     </button>
@@ -92,6 +92,40 @@ class TagController extends Controller
             'title' => $data['title'],
             'content' => $data['content'],
         ])->save();
+    }
+
+    public function updateTag(Request $request)
+    {
+        if (auth('admin')->check()) {
+            if ($request->isMethod('POST')) {
+
+                $data = $request->validate([
+                    'title' => ['required', 'unique:tags,title'],
+                    'content' => ['required']
+                ]);
+
+                Tag::find($request->id)->update([
+                    'title' => $data['title'],
+                    'content' => $data['content'],
+                ]);
+
+                return response()->json([
+                    'message' => $data['title']
+                ], 200);
+            }
+
+            if ($request->isMethod('GET')) {
+                $tag = Tag::find($request->id);
+                if ($tag) {
+                    return response()->json([
+                        'id' => $request->id,
+                        'title' => $tag->title,
+                        'content' => $tag->content
+                    ], 200);
+                }
+            }
+        }
+        return redirect()->route('admin.login');
     }
 
     public function deleteTag(Request $request)
