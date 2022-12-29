@@ -30,6 +30,14 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
                 Route::post('new-tag', 'TagController@newTag')->name('admin.newTag');
                 Route::match(['GET', 'POST'], 'update-tag', 'TagController@updateTag')->name('admin.updateTag');
             });
+
+            Route::prefix('user')->group(function () {
+                Route::get('show-user', 'UserManagerController@showUsers')->name('admin.showUser');
+                Route::get('get-user', 'UserManagerController@getUsers')->name('admin.getUser');
+                Route::post('delete-user', 'UserManagerController@deleteUser')->name('admin.deleteUser');
+                Route::post('new-user', 'UserManagerController@newUser')->name('admin.newUser');
+                Route::match(['GET', 'POST'], 'update-user', 'UserManagerController@updateUser')->name('admin.updateUser');
+            });
         });
     });
 });

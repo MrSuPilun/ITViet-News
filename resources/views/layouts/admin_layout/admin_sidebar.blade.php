@@ -76,8 +76,8 @@
                                     <span class="sub-item">Thẻ bài viết</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
+                            <li class="{{ request()->is('admin/table/user*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.showUser') }}">
                                     <span class="sub-item">Người dùng</span>
                                 </a>
                             </li>
