@@ -16,11 +16,6 @@ class TagController extends Controller
         return redirect()->route('admin.login');
     }
 
-    public function newTag(Request $request)
-    {
-        return response($request->title, 200);
-    }
-
     public function getTags(Request $request)
     {
         $draw = $request->get('draw');
@@ -84,6 +79,19 @@ class TagController extends Controller
 
         echo json_encode($response);
         exit;
+    }
+
+    public function newTag(Request $request)
+    {
+        $data = $request->validate([
+            'title' => ['required', 'unique:tags,title'],
+            'content' => ['required']
+        ]);
+
+        Tag::create([
+            'title' => $data['title'],
+            'content' => $data['content'],
+        ])->save();
     }
 
     public function deleteTag(Request $request)

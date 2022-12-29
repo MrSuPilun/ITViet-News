@@ -105,7 +105,6 @@
                 cancelButtonText: 'Hủy',
                 showLoaderOnConfirm: true,
             }).then((result) => {
-                console.log($('input[name=title]').val());
                 if (result.isConfirmed) {
 
                     $.ajax({
@@ -123,6 +122,13 @@
                                 'success'
                             )
                             $('#basic-datatables').DataTable().ajax.reload();
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            Swal.fire(
+                                'Thất bại!',
+                                'Kiểm tra lại các trường nhập :)',
+                                'error'
+                            );
                         }
                     });
 
@@ -141,8 +147,8 @@
             })
 
             swalWithBootstrapButtons.fire({
-                title: 'Bạn có muốn xóa bài viết này?',
-                text: "Bài viết sẽ được chuyển đến thùng rác!",
+                title: 'Bạn có muốn xóa thẻ này?',
+                text: "Thao tác này sẽ không hoàn lại!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Có',
@@ -174,7 +180,7 @@
                 ) {
                     swalWithBootstrapButtons.fire(
                         'Đã hủy!',
-                        'Không xóa bài viết này :)',
+                        'Không xóa thẻ này :)',
                         'error'
                     )
                 }
