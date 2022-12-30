@@ -102,7 +102,7 @@
 
         function addUser() {
             Swal.fire({
-                title: 'Thêm thẻ nội dung mới',
+                title: 'Thêm người dùng mới',
                 html: '<input class="swal2-input mx-0 w-100" name="name" placeholder="Họ và Tên">' +
                     '<input class="swal2-input mx-0 w-100" name="email" placeholder="Email">' +
                     '<input class="swal2-input mx-0 w-100" name="phone" placeholder="Số điện thoại">' +
@@ -158,7 +158,7 @@
                 },
                 success: function(data) {
                     Swal.fire({
-                        title: 'Cập nhập thẻ nội dung',
+                        title: 'Cập nhập thông tin người dùng',
                         html: '<input class="swal2-input mx-0 w-100" name="name" placeholder="Họ và Tên" value="' +
                             data['name'] + '">' +
                             '<input class="swal2-input mx-0 w-100" name="email" placeholder="Email" value="' +
