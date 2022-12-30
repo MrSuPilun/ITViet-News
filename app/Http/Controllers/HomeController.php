@@ -14,7 +14,7 @@ class HomeController extends Controller
         return view('pages.home', compact('trends'));
     }
 
-    public function news(Request $request)
+    public function viewPost(Request $request)
     {
         if ($request->has('id')) {
             $post = Post::find($request->id);
@@ -26,5 +26,11 @@ class HomeController extends Controller
             }
         }
         return redirect('/');
+    }
+
+    public function news()
+    {
+        $posts = Post::latest('created_at')->take(20)->get();
+        return view('pages.news', compact('posts'));
     }
 }
