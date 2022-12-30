@@ -121,34 +121,55 @@ class UserManagerController extends Controller
     {
         if (auth('admin')->check()) {
             if ($request->isMethod('POST')) {
+                $data = $request->validate([
+                    'name' => ['required'],
+                    'email' => ['required', 'email'],
+                ]);
 
-                // $data = $request->validate([
-                //     'title' => ['required', 'unique:tags,title'],
-                //     'content' => ['required']
-                // ]);
+                if (!($request->has('phone') && strlen($request->phone) > 9)) {
+                    return response('Số điện thoại không hợp lệ', 500);
+                }
+                $data['phone'] = $request->phone;
+                $data['id'] = $request->id;
 
-                // User::find($request->id)->update([
-                //     'title' => $data['title'],
-                //     'content' => $data['content'],
-                // ]);
+                // Create user
+                $user = User::find($data['id']);
+                $user->update([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'phone' => $data['phone'],
+                ]);
 
-                // return response()->json([
-                //     'message' => $data['title']
-                // ], 200);
+                if (strlen($request->password) > 5) {
+                    if ($request->password != $request->confirm_password) {
+                        return response('Mật khẩu không khớp', 500);
+                    }
+                    $user->update([
+                        'password' => Hash::make($request->password),
+                    ]);
+                }
+
+
+                if (!$user) {
+                    return response('Không tạo được tài khoản', 500);
+                }
+
+                return response($data['name'], 200);
             }
 
             if ($request->isMethod('GET')) {
-                // $tag = User::find($request->id);
-                // if ($tag) {
-                //     return response()->json([
-                //         'id' => $request->id,
-                //         'title' => $tag->title,
-                //         'content' => $tag->content
-                //     ], 200);
-                // }
+                $user = User::find($request->id);
+                if ($user) {
+                    return response()->json([
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'phone' => $user->phone,
+                    ], 200);
+                }
             }
         }
-        return redirect()->route('admin.login');
+        return response('Vui lòng đăng nhập tài khoản', 500);
     }
 
     public function deleteUser(Request $request)

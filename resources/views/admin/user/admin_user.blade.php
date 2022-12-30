@@ -151,7 +151,7 @@
         function updateUser(id) {
             console.log(id);
             $.ajax({
-                url: "{{ route('admin.updateTag') }}",
+                url: "{{ route('admin.updateUser') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "id": id
@@ -159,10 +159,15 @@
                 success: function(data) {
                     Swal.fire({
                         title: 'Cập nhập thẻ nội dung',
-                        html: '<input class="swal2-input mx-0 w-100" name="title" placeholder="Tiêu đề" value="' +
-                            data['title'] + '">' +
-                            '<textarea class="swal2-textarea mx-0 w-100" name="content" placeholder="Mô tả">' +
-                            data['content'] + '</textarea>',
+                        html: '<input class="swal2-input mx-0 w-100" name="name" placeholder="Họ và Tên" value="' +
+                            data['name'] + '">' +
+                            '<input class="swal2-input mx-0 w-100" name="email" placeholder="Email" value="' +
+                            data['email'] + '">' +
+                            '<input class="swal2-input mx-0 w-100" name="phone" placeholder="Số điện thoại" value="' +
+                            data['phone'] + '">' +
+                            '<input id="password" type="password" class="swal2-input mx-0 w-100" name="password" placeholder="Mật khẩu" onkeyup="checkConfirmPwd()">' +
+                            '<input id="confirm_password" type="password" class="swal2-input mx-0 w-100" name="confirm_password" placeholder="Nhập lại mật khẩu" onkeyup="checkConfirmPwd()">' +
+                            '<p id="notifi" class="text-left text-danger"><i class="fa-solid fa-xmark"></i><span class="ml-2">Mật khẩu chưa khớp<</span></p>',
                         showCancelButton: true,
                         confirmButtonText: 'Cập nhập',
                         cancelButtonText: 'Hủy',
@@ -171,23 +176,27 @@
                         if (result.isConfirmed) {
 
                             $.ajax({
-                                url: "{{ route('admin.updateTag') }}",
+                                url: "{{ route('admin.updateUser') }}",
                                 type: 'post',
                                 data: {
                                     "_token": "{{ csrf_token() }}",
                                     "id": data['id'],
-                                    "title": $('input[name=title]').val(),
-                                    "content": $('textarea[name=content]').val(),
+                                    "name": $('input[name=name]').val(),
+                                    "phone": $('input[name=phone]').val(),
+                                    "email": $('input[name=email]').val(),
+                                    "password": $('input[name=password]').val(),
+                                    "confirm_password": $('input[name=confirm_password]').val(),
                                 },
                                 success: function(result) {
                                     Swal.fire(
                                         'Thành công!',
-                                        'Cập nhập thành công thẻ: ' + result['message'],
+                                        'Cập nhập thành công người dùng: ' + result,
                                         'success'
                                     )
                                     $('#basic-datatables').DataTable().ajax.reload();
                                 },
                                 error: function(xhr, ajaxOptions, thrownError) {
+                                    console.log(xhr);
                                     Swal.fire(
                                         'Thất bại!',
                                         'Kiểm tra lại các trường nhập :)',
