@@ -124,7 +124,7 @@
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-02.html">Sản phẩm </a>
+                            <a href="category-02.html">Sản phẩm</a>
                         </li>
 
                         <li class="mega-menu-item">

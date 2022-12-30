@@ -1,6 +1,5 @@
 @extends('layouts.app_layout.app_layout')
 
-
 @section('content')
     <section class="bg0 p-t-70">
         <div class="container">
@@ -26,30 +25,32 @@
                                 @foreach ($posts as $item)
                                     <div class="col-sm-6 p-r-25 p-r-15-sr991">
                                         <div class="m-b-45">
-                                            <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+                                            <a href="{{ route('post') }}?id={{ $item->id }}"
+                                                class="wrap-pic-w hov1 trans-03">
                                                 <img src="{{ $item->thumbnail }}" alt="IMG">
                                             </a>
 
                                             <div class="p-t-16">
                                                 <h5 class="p-b-5">
-                                                    <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                                    <a href="{{ route('post') }}?id={{ $item->id }}"
+                                                        class="f1-m-3 cl2 hov-cl10 trans-03">
                                                         {{ $item->title }}
                                                     </a>
                                                 </h5>
 
                                                 <span class="cl8">
-                                                    <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-                                                        by John Alvarado
-                                                    </a>
+                                                    <span class="f1-s-4 cl8 hov-cl10 trans-03">
+                                                        Tác giả: {{ $item->author()->first()->name }}
+                                                        </>
 
-                                                    <span class="f1-s-3 m-rl-3">
-                                                        -
-                                                    </span>
+                                                        <span class="f1-s-3 m-rl-3">
+                                                            -
+                                                        </span>
 
-                                                    <span class="f1-s-3">
-                                                        {{ $item->created_at }}
+                                                        <span class="f1-s-3">
+                                                            {{ diffInTime($item->created_at) }}
+                                                        </span>
                                                     </span>
-                                                </span>
                                             </div>
                                         </div>
                                     </div>

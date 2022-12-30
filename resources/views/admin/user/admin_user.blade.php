@@ -108,7 +108,7 @@
                     '<input class="swal2-input mx-0 w-100" name="phone" placeholder="Số điện thoại">' +
                     '<input id="password" type="password" class="swal2-input mx-0 w-100" name="password" placeholder="Mật khẩu" onkeyup="checkConfirmPwd()">' +
                     '<input id="confirm_password" type="password" class="swal2-input mx-0 w-100" name="confirm_password" placeholder="Nhập lại mật khẩu" onkeyup="checkConfirmPwd()">' +
-                    '<p id="notifi" class="text-left text-danger"><i class="fa-solid fa-xmark"></i><span class="ml-2">Mật khẩu chưa khớp<</span></p>',
+                    '<p id="notifi" class="text-left text-danger"><i class="fa-solid fa-xmark"></i><span class="ml-2">Mật khẩu chưa khớp</span></p>',
                 showCancelButton: true,
                 confirmButtonText: 'Thêm',
                 cancelButtonText: 'Hủy',
@@ -167,7 +167,7 @@
                             data['phone'] + '">' +
                             '<input id="password" type="password" class="swal2-input mx-0 w-100" name="password" placeholder="Mật khẩu" onkeyup="checkConfirmPwd()">' +
                             '<input id="confirm_password" type="password" class="swal2-input mx-0 w-100" name="confirm_password" placeholder="Nhập lại mật khẩu" onkeyup="checkConfirmPwd()">' +
-                            '<p id="notifi" class="text-left text-danger"><i class="fa-solid fa-xmark"></i><span class="ml-2">Mật khẩu chưa khớp<</span></p>',
+                            '<p id="notifi" class="text-left text-danger"><i class="fa-solid fa-xmark"></i><span class="ml-2">Mật khẩu chưa khớp</span></p>',
                         showCancelButton: true,
                         confirmButtonText: 'Cập nhập',
                         cancelButtonText: 'Hủy',

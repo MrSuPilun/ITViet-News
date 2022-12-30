@@ -10,9 +10,8 @@ class HomeController extends Controller
 {
     public function home()
     {
-        return view('pages.home', [
-            'trends' => DB::table('posts')->latest('id')->take(6)->get()
-        ]);
+        $trends = Post::latest('id')->take(6)->get();
+        return view('pages.home', compact('trends'));
     }
 
     public function news(Request $request)
@@ -23,7 +22,7 @@ class HomeController extends Controller
             $post->save();
 
             if ($post) {
-                return view('pages.news', ['post' => $post]);
+                return view('pages.post', ['post' => $post]);
             }
         }
         return redirect('/');
