@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         if ($request->isMethod('POST')) {
             $data = $request->validate([
-                'email' => ['required', 'email'],
+                'email' => ['required', 'email', 'exists:users,email'],
                 'password' => ['required', 'min:6'],
             ]);
             if (Auth::guard('user')->attempt($data, $request->remember)) {
