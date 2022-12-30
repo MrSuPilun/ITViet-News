@@ -115,11 +115,12 @@
 
                     <ul class="main-menu justify-content-center">
                         <li class="main-menu-active">
-                            <a href="/">Trang chủ</a>
+                            <a href="/">Trang chủ <i class="fa-sharp fa-solid fa-house ml-2"></i></a>
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-01.html">Tin tức</a>
+                            <a href="category-01.html">Tin tức<i
+                                    class="fa-sharp fa-solid fa-fire ml-2 text-danger"></i></a>
                         </li>
 
                         <li class="mega-menu-item">
@@ -143,7 +144,7 @@
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="#">Liên hệ</a>
+                            <a href="#">Liên hệ <i class="fa-solid fa-phone-flip ml-1"></i></a>
                         </li>
                     </ul>
                 </nav>

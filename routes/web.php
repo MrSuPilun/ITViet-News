@@ -23,6 +23,7 @@ Route::get('/', [HomeController::class, 'home']);
 Route::get('/p', [HomeController::class, 'news'])->name('post');
 
 Route::get('search-tag', [SearchController::class, 'searchTagByTitle'])->name('searchTag');
+Route::get('search', [SearchController::class, 'searchPosts'])->name('searchPost');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/user.php';
