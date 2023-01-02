@@ -9,7 +9,7 @@
 
                         <div class="flex-col-e-s s-full p-rl-25 p-tb-11">
                             @if ($item->tags->first())
-                                <a href="#"
+                                <a href="{{ route('searchPostsByTag', ['t' => $item->tags->first()->title]) }}"
                                     class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">{{ $item->tags->first()->title }}</a>
                             @endif
 
