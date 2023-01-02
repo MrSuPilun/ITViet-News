@@ -11,7 +11,7 @@
                         <div class="p-b-25 p-r-10 p-r-0-sr991">
                             <div class="how2 how2-cl3 flex-s-c">
                                 <h3 class="f1-m-2 cl14 tab01-title">
-                                    Bài viết
+                                    {{ $title }}
                                 </h3>
                             </div>
                             {{-- Posts --}}
@@ -58,31 +58,6 @@
                             </div>
                         </div>
 
-                        {{--  Tags Container --}}
-                        <div class="p-b-25 p-r-10 p-r-0-sr991">
-                            <div class="how2 how2-cl1 flex-s-c">
-                                <h3 class="f1-m-2 cl12 tab01-title">
-                                    Thẻ
-                                </h3>
-                            </div>
-
-                            {{-- Tags --}}
-                            <div class="flex-wr-s-s m-rl--5 p-t-35">
-
-                                @if (!count($tags))
-                                    <div class="col p-r-25 p-r-15-sr991">
-                                        <div class="text-center">Không tìm thấy kết quả</div>
-                                    </div>
-                                @endif
-                                {{-- Item --}}
-                                @foreach ($tags as $item)
-                                    <a href="{{ route('searchPostsByTag', ['t' => $item->title]) }}"
-                                        class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                        {{ $item->title }}
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -214,8 +189,7 @@
                         <!--  -->
                         <div class="flex-c-s p-t-8 p-b-65">
                             <a href="#">
-                                <img class="max-w-full" src="{{ asset('assets/app/images/banner-02.jpg') }}"
-                                    alt="IMG">
+                                <img class="max-w-full" src="{{ asset('assets/app/images/banner-02.jpg') }}" alt="IMG">
                             </a>
                         </div>
 
