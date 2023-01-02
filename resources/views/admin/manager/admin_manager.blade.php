@@ -7,12 +7,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            Quản lý người dùng
+                            Quản lý quản trị viên
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-outline-success" onclick="addUser()">
+                            <button type="button" class="btn btn-outline-success" onclick="addManager()">
                                 <i class="fas fa-plus-square"></i>
                                 <span class="pl-2">Thêm người dùng</span>
                             </button>
@@ -22,9 +22,8 @@
                                     <tr>
                                         <th scope="col" style="width: 20px;">#</th>
                                         <th scope="col">Họ và tên</th>
-                                        <th scope="col" style="width: 50px;">SĐT</th>
-                                        <th scope="col" style="width: 50px;">Email</th>
-                                        <th scope="col">Địa chỉ</th>
+                                        <th scope="col">SĐT</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col" style="width: 100px">Chức năng</th>
                                     </tr>
                                 </thead>
@@ -34,9 +33,8 @@
                                     <tr>
                                         <th scope="col" style="width: 20px;">#</th>
                                         <th scope="col">Họ và tên</th>
-                                        <th scope="col" style="width: 50px;">SĐT</th>
-                                        <th scope="col" style="width: 50px;">Email</th>
-                                        <th scope="col">Địa chỉ</th>
+                                        <th scope="col">SĐT</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col" style="width: 100px">Chức năng</th>
                                     </tr>
                                 </tfoot>
@@ -56,7 +54,7 @@
             $('#basic-datatables').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.getUser') }}",
+                ajax: "{{ route('admin.getManager') }}",
                 columns: [{
                         data: 'id'
                     },
@@ -68,9 +66,6 @@
                     },
                     {
                         data: 'email'
-                    },
-                    {
-                        data: 'address'
                     },
                     {
                         data: 'action'
@@ -100,12 +95,12 @@
             });
         });
 
-        function addUser() {
+        function addManager() {
             Swal.fire({
                 title: 'Thêm người dùng mới',
                 html: '<input class="swal2-input mx-0 w-100" name="name" placeholder="Họ và Tên">' +
-                    '<input class="swal2-input mx-0 w-100" name="email" placeholder="Email">' +
                     '<input class="swal2-input mx-0 w-100" name="phone" placeholder="Số điện thoại">' +
+                    '<input class="swal2-input mx-0 w-100" name="email" placeholder="Email">' +
                     '<input id="password" type="password" class="swal2-input mx-0 w-100" name="password" placeholder="Mật khẩu" onkeyup="checkConfirmPwd()">' +
                     '<input id="confirm_password" type="password" class="swal2-input mx-0 w-100" name="confirm_password" placeholder="Nhập lại mật khẩu" onkeyup="checkConfirmPwd()">' +
                     '<p id="notifi" class="text-left text-danger"><i class="fa-solid fa-xmark"></i><span class="ml-2">Mật khẩu chưa khớp</span></p>',
@@ -117,7 +112,7 @@
                 if (result.isConfirmed) {
 
                     $.ajax({
-                        url: "{{ route('admin.newUser') }}",
+                        url: "{{ route('admin.newManager') }}",
                         type: 'post',
                         data: {
                             "_token": "{{ csrf_token() }}",
@@ -148,10 +143,10 @@
             })
         }
 
-        function updateUser(id) {
+        function updateManager(id) {
             console.log(id);
             $.ajax({
-                url: "{{ route('admin.updateUser') }}",
+                url: "{{ route('admin.updateManager') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "id": id
@@ -176,7 +171,7 @@
                         if (result.isConfirmed) {
 
                             $.ajax({
-                                url: "{{ route('admin.updateUser') }}",
+                                url: "{{ route('admin.updateManager') }}",
                                 type: 'post',
                                 data: {
                                     "_token": "{{ csrf_token() }}",
@@ -196,7 +191,6 @@
                                     $('#basic-datatables').DataTable().ajax.reload();
                                 },
                                 error: function(xhr, ajaxOptions, thrownError) {
-                                    console.log(xhr);
                                     Swal.fire(
                                         'Thất bại!',
                                         'Kiểm tra lại các trường nhập :)',
@@ -213,7 +207,7 @@
         }
 
         // Handle delete User
-        function deleteUser(id) {
+        function deleteManager(id) {
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -234,31 +228,29 @@
                 if (result.isConfirmed) {
 
                     $.ajax({
-                        url: "{{ route('admin.deleteUser') }}",
+                        url: "{{ route('admin.deleteManager') }}",
                         type: 'post',
                         data: {
                             "_token": "{{ csrf_token() }}",
                             "id": id,
                         },
-                        success: function() {
+                        success: function(data) {
                             swalWithBootstrapButtons.fire(
                                 'Đã xóa!',
-                                'Xóa thành công!',
+                                data,
                                 'success'
                             )
                             $('#basic-datatables').DataTable().ajax.reload();
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            Swal.fire(
+                                'Thất bại!',
+                                xhr.responseText,
+                                'error'
+                            );
                         }
                     });
 
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Đã hủy!',
-                        'Không xóa người dùng này :)',
-                        'error'
-                    )
                 }
             })
 

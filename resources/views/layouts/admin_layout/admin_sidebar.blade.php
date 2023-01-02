@@ -81,8 +81,8 @@
                                     <span class="sub-item">Người dùng</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
+                            <li class="{{ request()->is('admin/table/manager*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.showManager') }}">
                                     <span class="sub-item">Quản lý</span>
                                 </a>
                             </li>

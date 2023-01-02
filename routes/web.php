@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'home']);
-Route::get('/p', [HomeController::class, 'news'])->name('post');
+Route::get('/p', [HomeController::class, 'viewPost'])->name('post');
+Route::get('/news', [HomeController::class, 'news'])->name('news');
 
 Route::get('search-tag', [SearchController::class, 'searchTagByTitle'])->name('searchTag');
 Route::get('search', [SearchController::class, 'searchPosts'])->name('searchPost');

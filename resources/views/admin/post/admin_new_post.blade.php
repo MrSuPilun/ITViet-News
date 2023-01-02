@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group @error('summary') has-error @enderror">
                                     <label for="summary">Tóm tắt</label>
-                                    <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="Nhập tóm tắt" maxlength="255"
+                                    <textarea class="form-control" name="summary" id="summary" rows="3" placeholder="Nhập tóm tắt" maxlength="254"
                                         value="{{ old('summary') }}"></textarea>
                                     @error('summary')
                                         <small id="helpId" class="form-text text-muted text-danger">

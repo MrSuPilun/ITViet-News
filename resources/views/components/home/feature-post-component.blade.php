@@ -8,10 +8,10 @@
                         <a href="{{ route('post') }}?id={{ $item->id }}" class="dis-block how1-child1 trans-03"></a>
 
                         <div class="flex-col-e-s s-full p-rl-25 p-tb-11">
-                            <a href="#"
-                                class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                Life Style
-                            </a>
+                            @if ($item->tags->first())
+                                <a href="#"
+                                    class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">{{ $item->tags->first()->title }}</a>
+                            @endif
 
                             <h3 class="how1-child2 m-t-10">
                                 <a href="{{ route('post') }}?id={{ $item->id }}"

@@ -114,17 +114,22 @@
                     </a>
 
                     <ul class="main-menu justify-content-center">
-                        <li class="main-menu-active">
-                            <a href="/">Trang chủ <i class="fa-sharp fa-solid fa-house ml-2"></i></a>
+                        <li class="@if (request()->is('/')) main-menu-active @else mega-menu-item @endif">
+                            <a href="/">
+                                Trang chủ
+                                <i class="fa-sharp fa-solid fa-house ml-2"></i>
+                            </a>
+                        </li>
+
+                        <li class="@if (request()->is('news*')) main-menu-active @else mega-menu-item @endif">
+                            <a href="{{ route('news') }}">
+                                Tin tức
+                                <i class="fa-sharp fa-solid fa-fire ml-2 text-danger"></i>
+                            </a>
                         </li>
 
                         <li class="mega-menu-item">
-                            <a href="category-01.html">Tin tức<i
-                                    class="fa-sharp fa-solid fa-fire ml-2 text-danger"></i></a>
-                        </li>
-
-                        <li class="mega-menu-item">
-                            <a href="category-02.html">Sản phẩm </a>
+                            <a href="category-02.html">Sản phẩm</a>
                         </li>
 
                         <li class="mega-menu-item">

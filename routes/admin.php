@@ -32,11 +32,19 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
             });
 
             Route::prefix('user')->group(function () {
-                Route::get('show-user', 'UserManagerController@showUsers')->name('admin.showUser');
-                Route::get('get-user', 'UserManagerController@getUsers')->name('admin.getUser');
-                Route::post('delete-user', 'UserManagerController@deleteUser')->name('admin.deleteUser');
-                Route::post('new-user', 'UserManagerController@newUser')->name('admin.newUser');
-                Route::match(['GET', 'POST'], 'update-user', 'UserManagerController@updateUser')->name('admin.updateUser');
+                Route::get('show-user', 'UserManagementController@showUsers')->name('admin.showUser');
+                Route::get('get-user', 'UserManagementController@getUsers')->name('admin.getUser');
+                Route::post('delete-user', 'UserManagementController@deleteUser')->name('admin.deleteUser');
+                Route::post('new-user', 'UserManagementController@newUser')->name('admin.newUser');
+                Route::match(['GET', 'POST'], 'update-user', 'UserManagementController@updateUser')->name('admin.updateUser');
+            });
+
+            Route::prefix('manager')->group(function () {
+                Route::get('show-manager', 'AdminManagementController@showManagers')->name('admin.showManager');
+                Route::get('get-manager', 'AdminManagementController@getManagers')->name('admin.getManager');
+                Route::post('delete-manager', 'AdminManagementController@deleteManager')->name('admin.deleteManager');
+                Route::post('new-manager', 'AdminManagementController@newManager')->name('admin.newManager');
+                Route::match(['GET', 'POST'], 'update-manager', 'AdminManagementController@updateManager')->name('admin.updateManager');
             });
         });
     });
