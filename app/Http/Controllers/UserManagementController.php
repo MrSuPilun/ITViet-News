@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UserManagerController extends Controller
+class UserManagementController extends Controller
 {
     public function showUsers()
     {
@@ -176,6 +176,8 @@ class UserManagerController extends Controller
     {
         if ($request->has('id')) {
             User::find($request->id)->forceDelete();
+            return response('Xóa người dùng thành công', 200);
         }
+        return response('Xóa người dùng thất bại', 500);
     }
 }
