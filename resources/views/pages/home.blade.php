@@ -86,7 +86,6 @@
                                                 </span>
                                             </span>
                                         </div>
-                                        blog-detail-01.html
                                     </div>
 
                                     <!-- Item post -->
@@ -680,7 +679,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-10 col-lg-4">
+                {{-- SideBar --}}
+                @include('layouts.app_layout.app_sidebar')
+                {{-- <div class="col-md-10 col-lg-4">
                     <div class="p-l-10 p-rl-0-sr991 p-b-20">
                         <!-- Stay Connected -->
                         <div class="p-b-35">
@@ -926,7 +927,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
