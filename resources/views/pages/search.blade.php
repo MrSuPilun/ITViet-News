@@ -69,7 +69,7 @@
                             {{-- Tags --}}
                             <div class="flex-wr-s-s m-rl--5 p-t-35">
 
-                                @if (!count($posts))
+                                @if (!count($tags))
                                     <div class="col p-r-25 p-r-15-sr991">
                                         <div class="text-center">Không tìm thấy kết quả</div>
                                     </div>
