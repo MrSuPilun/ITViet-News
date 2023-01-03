@@ -24,7 +24,7 @@
                                         <th scope="col">Họ và tên</th>
                                         <th scope="col">SĐT</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col" style="width: 100px">Chức năng</th>
+                                        <th scope="col" style="width: 100px" data-orderable="false">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>

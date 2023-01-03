@@ -25,7 +25,7 @@
                                         <th scope="col" style="width: 50px;">SĐT</th>
                                         <th scope="col" style="width: 50px;">Email</th>
                                         <th scope="col">Địa chỉ</th>
-                                        <th scope="col" style="width: 100px">Chức năng</th>
+                                        <th scope="col" style="width: 100px" data-orderable="false">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>

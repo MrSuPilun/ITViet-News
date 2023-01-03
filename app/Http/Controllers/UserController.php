@@ -67,8 +67,7 @@ class UserController extends Controller
             $user->save();
 
             // Login new account
-            auth('user')->attempt(['email' => $data['email'], 'password' => $data['password']], true);
-            $request->session()->regenerate();
+            Auth::login($user);
 
             return redirect('/');
         }

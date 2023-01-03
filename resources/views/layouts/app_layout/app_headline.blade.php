@@ -22,7 +22,7 @@
                 </span>
             </div>
 
-            <form action="{{ route('searchPost') }}" method="get">
+            <form action="{{ route('searchPostAndTag') }}" method="get">
                 <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
                     <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search"
                         placeholder="Tìm kiếm">

@@ -24,7 +24,7 @@ Route::get('/p', [HomeController::class, 'viewPost'])->name('post');
 Route::get('/news', [HomeController::class, 'news'])->name('news');
 
 Route::get('search-tag', [SearchController::class, 'searchTagByTitle'])->name('searchTag');
-Route::get('search', [SearchController::class, 'searchPosts'])->name('searchPost');
+Route::get('search', [SearchController::class, 'searchPostsAndTags'])->name('searchPostAndTag');
 Route::get('tags', [SearchController::class, 'searchPostsByTag'])->name('searchPostsByTag');
 
 require __DIR__ . '/admin.php';

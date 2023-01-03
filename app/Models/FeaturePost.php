@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class FeaturePost extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['post_id', 'created_at', 'updated_at'];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id');
+    }
 }

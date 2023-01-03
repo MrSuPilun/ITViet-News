@@ -53,9 +53,10 @@
                         <p>Tùy chỉnh giao diện</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="sidebarLayouts">
+                    <div class="collapse {{ request()->is('admin/custom-layout*') ? 'show' : '' }}"
+                        id="sidebarLayouts">
                         <ul class="nav nav-collapse">
-                            <li class="{{ request()->is('admin/custom-layout/custom-post*') ? 'active' : '' }}">
+                            <li class="{{ request()->is('admin/custom-layout/feature-post*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.showFeaturePost') }}">
                                     <span class="sub-item">Bài viết nổi bật</span>
                                 </a>

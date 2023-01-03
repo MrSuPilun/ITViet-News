@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\FeaturePost;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -10,8 +10,12 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $trends = Post::latest('id')->take(6)->get();
-        return view('pages.home', compact('trends'));
+        $feature = FeaturePost::latest('id')->take(6)->get();
+        $posts = [];
+        foreach ($feature as $item) {
+            $posts[] = $item->post()->first();
+        }
+        return view('pages.home', compact('posts'));
     }
 
     public function viewPost(Request $request)

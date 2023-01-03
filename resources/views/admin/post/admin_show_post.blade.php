@@ -16,7 +16,7 @@
                                         <th scope="col" style="width: 20px;">#</th>
                                         <th scope="col">Tiêu đề</th>
                                         <th scope="col" style="width: 50px;">Ngày tạo</th>
-                                        <th scope="col" style="width: 100px">Chức năng</th>
+                                        <th scope="col" style="width: 100px" data-orderable="false">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -150,18 +150,87 @@
                         }
                     });
 
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Đã hủy!',
-                        'Không xóa bài viết này :)',
-                        'error'
-                    )
                 }
             })
 
+        }
+
+        function addFeaturePost(id) {
+            Swal.fire({
+                title: 'Thêm bài viết nổi bật',
+                html: '<input class="swal2-input mx-0 w-100" name="post_id" placeholder="Tiêu đề">',
+                showCancelButton: true,
+                confirmButtonText: 'Thêm',
+                cancelButtonText: 'Hủy',
+                showLoaderOnConfirm: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "{{ route('admin.newFeaturePost') }}",
+                        type: 'post',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "post_id": id,
+                        },
+                        success: function(data) {
+                            Swal.fire(
+                                'Thành công!',
+                                'Thêm thành công: ' + data,
+                                'success'
+                            );
+                            reloadFeaturePost();
+                            $('#basic-datatables').DataTable().ajax.reload();
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            Swal.fire(
+                                'Thất bại!',
+                                'Kiểm tra lại các trường nhập :)',
+                                'error'
+                            );
+                        }
+                    });
+
+                }
+            })
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Bài viết này là bài viết nổi bật?',
+                text: "Bài viết sẽ được thêm vào bài viết nổi bật!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "{{ route('admin.newFeaturePost') }}",
+                        type: 'post',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "post_id": id,
+                        },
+                        success: function() {
+                            swalWithBootstrapButtons.fire(
+                                'Thành công!',
+                                'Thêm thành công!',
+                                'success'
+                            )
+                            $('#basic-datatables').DataTable().ajax.reload();
+                        }
+                    });
+
+                }
+            })
         }
     </script>
 @endsection

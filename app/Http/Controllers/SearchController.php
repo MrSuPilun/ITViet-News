@@ -15,7 +15,7 @@ class SearchController extends Controller
         return response()->json($tags);
     }
 
-    public function searchPosts(Request $request)
+    public function searchPostsAndTags(Request $request)
     {
         $posts = Post::where('title', 'like', '%' . $request->search . '%')->take(20)->get();
         $tags = Tag::where('title', 'like', '%' . $request->search . '%')->take(10)->get();

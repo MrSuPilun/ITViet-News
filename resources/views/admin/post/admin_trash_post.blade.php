@@ -16,7 +16,7 @@
                                         <th scope="col" style="width: 20px;">#</th>
                                         <th scope="col">Tiêu đề</th>
                                         <th scope="col" style="width: 50px;">Ngày xóa</th>
-                                        <th scope="col" style="width: 100px">Chức năng</th>
+                                        <th scope="col" style="width: 100px" data-orderable="false">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
