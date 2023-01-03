@@ -47,7 +47,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('admin/custom-layout*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#sidebarLayouts">
                         <i class="fas fa-th-list"></i>
                         <p>Tùy chỉnh giao diện</p>
@@ -55,9 +55,9 @@
                     </a>
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="#">
-                                    <span class="sub-item">Sidebar Style 1</span>
+                            <li class="{{ request()->is('admin/custom-layout/custom-post*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.showFeaturePost') }}">
+                                    <span class="sub-item">Bài viết nổi bật</span>
                                 </a>
                             </li>
                         </ul>

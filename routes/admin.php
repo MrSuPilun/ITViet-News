@@ -47,6 +47,12 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
                 Route::match(['GET', 'POST'], 'update-manager', 'AdminManagementController@updateManager')->name('admin.updateManager');
             });
         });
+
+        Route::prefix('custom-layout')->group(function () {
+            Route::prefix('feature-post')->group(function () {
+                Route::get('show', 'FeaturePostController@show')->name('admin.showFeaturePost');
+            });
+        });
     });
 });
 
