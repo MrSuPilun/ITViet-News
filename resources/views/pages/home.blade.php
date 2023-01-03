@@ -3,7 +3,7 @@
 
 @section('content')
     <!-- Feature post -->
-    <x-home.feature-post-component :feature="$trends" />
+    <x-home.feature-post-component :feature="$posts" />
 
     <!-- Post -->
     <section class="bg0 p-t-70">

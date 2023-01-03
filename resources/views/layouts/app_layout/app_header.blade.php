@@ -1,27 +1,31 @@
 <header>
     <!-- Header desktop -->
     <div class="container-menu-desktop">
+
         <div class="topbar">
             <div class="content-topbar container h-100">
-                <div class="left-topbar">
-                </div>
+                @if (!request()->is('user*'))
+                    <div class="left-topbar">
+                    </div>
 
-                <div class="right-topbar">
-                    @auth('user')
-                        <a href="{{ route('user.profile') }}" class="left-topbar-item">
-                            <i class="fa fa-user mr-2" aria-hidden="true"></i>
-                            {{ auth('user')->user()->name }}
-                        </a>
-                    @else
-                        <a href="{{ route('user.register') }}" class="left-topbar-item">
-                            Đăng ký
-                        </a>
+                    <div class="right-topbar">
+                        @auth('user')
+                            <a href="{{ route('user.profile') }}" class="left-topbar-item">
+                                <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                                {{ auth('user')->user()->name }}
+                            </a>
+                        @else
+                            <a href="{{ route('user.register') }}" class="left-topbar-item">
+                                Đăng ký
+                            </a>
 
-                        <a href="{{ route('login') }}" class="left-topbar-item">
-                            Đăng nhập
-                        </a>
-                    @endauth
-                </div>
+                            <a href="{{ route('login') }}" class="left-topbar-item">
+                                Đăng nhập
+                            </a>
+                        @endauth
+                    </div>
+                @endif
+
             </div>
         </div>
 

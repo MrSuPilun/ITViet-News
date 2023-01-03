@@ -7,24 +7,38 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            Quản lý người dùng
+                            Xem trước bài viết nổi bật
+                            <span class="ml-2 text-primary"><i class="fa-solid fa-arrows-rotate btn-reload"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <iframe id="preview" width="100%" height="600px"
+                            src="{{ route('admin.preview.showFeaturePost') }}" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            Bài viết nổi bật
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-outline-success" onclick="addUser()">
+                            <button type="button" class="btn btn-outline-success" onclick="addFeaturePost()">
                                 <i class="fas fa-plus-square"></i>
-                                <span class="pl-2">Thêm người dùng</span>
+                                <span class="pl-2">Thêm bài viết nổi bật</span>
                             </button>
                             <hr>
                             <table id="basic-datatables" class="display table table-striped table-hover dataTable">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 20px;">#</th>
-                                        <th scope="col">Họ và tên</th>
-                                        <th scope="col" style="width: 50px;">SĐT</th>
-                                        <th scope="col" style="width: 50px;">Email</th>
-                                        <th scope="col">Địa chỉ</th>
+                                        <th scope="col">Bài viết nổi bật</th>
+                                        <th scope="col" style="width: 50px;">Ngày tạo</th>
                                         <th scope="col" style="width: 100px" data-orderable="false">Chức năng</th>
                                     </tr>
                                 </thead>
@@ -33,10 +47,8 @@
                                 <tfoot>
                                     <tr>
                                         <th scope="col" style="width: 20px;">#</th>
-                                        <th scope="col">Họ và tên</th>
-                                        <th scope="col" style="width: 50px;">SĐT</th>
-                                        <th scope="col" style="width: 50px;">Email</th>
-                                        <th scope="col">Địa chỉ</th>
+                                        <th scope="col">Bài viết nổi bật</th>
+                                        <th scope="col" style="width: 50px;">Ngày tạo</th>
                                         <th scope="col" style="width: 100px">Chức năng</th>
                                     </tr>
                                 </tfoot>
@@ -52,25 +64,29 @@
 @section('footer')
     {{-- Setting Datatable --}}
     <script>
+        function reloadFeaturePost() {
+            document.getElementById('preview').src += '';
+        }
+
         $(document).ready(function() {
+            $('.btn-reload').click(function(e) {
+                reloadFeaturePost()
+            });
             $('#basic-datatables').DataTable({
+                order: [
+                    [0, 'desc']
+                ],
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.getUser') }}",
+                ajax: "{{ route('admin.getFeaturePost') }}",
                 columns: [{
-                        data: 'id'
+                        data: 'post_id'
                     },
                     {
-                        data: 'name'
+                        data: 'post_title'
                     },
                     {
-                        data: 'phone'
-                    },
-                    {
-                        data: 'email'
-                    },
-                    {
-                        data: 'address'
+                        data: 'created_at'
                     },
                     {
                         data: 'action'
@@ -79,14 +95,14 @@
                 "autoWidth": false,
                 info: false,
                 pagingType: 'full_numbers',
-                pageLength: 5,
+                pageLength: 6,
                 language: {
                     search: "Tìm kiếm:",
                     "lengthMenu": 'Hiển thị <select class="form-control">' +
-                        '<option value="5">5</option>' +
-                        '<option value="10">10</option>' +
-                        '<option value="20">20</option>' +
-                        '<option value="30">30</option>' +
+                        '<option value="6">6</option>' +
+                        '<option value="12">12</option>' +
+                        '<option value="18">18</option>' +
+                        '<option value="24">24</option>' +
                         '</select> hàng',
                     "paginate": {
                         "first": "Đầu",
@@ -100,15 +116,10 @@
             });
         });
 
-        function addUser() {
+        function addFeaturePost() {
             Swal.fire({
-                title: 'Thêm người dùng mới',
-                html: '<input class="swal2-input mx-0 w-100" name="name" placeholder="Họ và Tên">' +
-                    '<input class="swal2-input mx-0 w-100" name="email" placeholder="Email">' +
-                    '<input class="swal2-input mx-0 w-100" name="phone" placeholder="Số điện thoại">' +
-                    '<input id="password" type="password" class="swal2-input mx-0 w-100" name="password" placeholder="Mật khẩu" onkeyup="checkConfirmPwd()">' +
-                    '<input id="confirm_password" type="password" class="swal2-input mx-0 w-100" name="confirm_password" placeholder="Nhập lại mật khẩu" onkeyup="checkConfirmPwd()">' +
-                    '<p id="notifi" class="text-left text-danger"><i class="fa-solid fa-xmark"></i><span class="ml-2">Mật khẩu chưa khớp</span></p>',
+                title: 'Thêm bài viết nổi bật',
+                html: '<input class="swal2-input mx-0 w-100" name="post_id" placeholder="Id bài viết nổi bật">',
                 showCancelButton: true,
                 confirmButtonText: 'Thêm',
                 cancelButtonText: 'Hủy',
@@ -117,22 +128,19 @@
                 if (result.isConfirmed) {
 
                     $.ajax({
-                        url: "{{ route('admin.newUser') }}",
+                        url: "{{ route('admin.newFeaturePost') }}",
                         type: 'post',
                         data: {
                             "_token": "{{ csrf_token() }}",
-                            "name": $('input[name=name]').val(),
-                            "phone": $('input[name=phone]').val(),
-                            "email": $('input[name=email]').val(),
-                            "password": $('input[name=password]').val(),
-                            "confirm_password": $('input[name=confirm_password]').val(),
+                            "post_id": $('input[name=post_id]').val(),
                         },
                         success: function(data) {
                             Swal.fire(
                                 'Thành công!',
-                                'Tạo người dùng ' + data + ' thành công!',
+                                'Thêm thành công: ' + data,
                                 'success'
-                            )
+                            );
+                            reloadFeaturePost();
                             $('#basic-datatables').DataTable().ajax.reload();
                         },
                         error: function(xhr, ajaxOptions, thrownError) {
@@ -148,26 +156,19 @@
             })
         }
 
-        function updateUser(id) {
-            console.log(id);
+        function updateFeaturePost(id) {
             $.ajax({
-                url: "{{ route('admin.updateUser') }}",
+                url: "{{ route('admin.updateFeaturePost') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "id": id
                 },
                 success: function(data) {
                     Swal.fire({
-                        title: 'Cập nhập thông tin người dùng',
-                        html: '<input class="swal2-input mx-0 w-100" name="name" placeholder="Họ và Tên" value="' +
-                            data['name'] + '">' +
-                            '<input class="swal2-input mx-0 w-100" name="email" placeholder="Email" value="' +
-                            data['email'] + '">' +
-                            '<input class="swal2-input mx-0 w-100" name="phone" placeholder="Số điện thoại" value="' +
-                            data['phone'] + '">' +
-                            '<input id="password" type="password" class="swal2-input mx-0 w-100" name="password" placeholder="Mật khẩu" onkeyup="checkConfirmPwd()">' +
-                            '<input id="confirm_password" type="password" class="swal2-input mx-0 w-100" name="confirm_password" placeholder="Nhập lại mật khẩu" onkeyup="checkConfirmPwd()">' +
-                            '<p id="notifi" class="text-left text-danger"><i class="fa-solid fa-xmark"></i><span class="ml-2">Mật khẩu chưa khớp</span></p>',
+                        title: 'Cập nhập bài viết nổi bật',
+                        html: '<input class="swal2-input mx-0 w-100" name="post_id" placeholder="Id bài viết nổi bật" value="' +
+                            data['post_id'] + '">' +
+                            '<input type="hidden" name="id" value="' + data['id'] + '">',
                         showCancelButton: true,
                         confirmButtonText: 'Cập nhập',
                         cancelButtonText: 'Hủy',
@@ -176,27 +177,23 @@
                         if (result.isConfirmed) {
 
                             $.ajax({
-                                url: "{{ route('admin.updateUser') }}",
+                                url: "{{ route('admin.updateFeaturePost') }}",
                                 type: 'post',
                                 data: {
                                     "_token": "{{ csrf_token() }}",
-                                    "id": data['id'],
-                                    "name": $('input[name=name]').val(),
-                                    "phone": $('input[name=phone]').val(),
-                                    "email": $('input[name=email]').val(),
-                                    "password": $('input[name=password]').val(),
-                                    "confirm_password": $('input[name=confirm_password]').val(),
+                                    "id": $('input[name=id]').val(),
+                                    "post_id": $('input[name=post_id]').val(),
                                 },
-                                success: function(result) {
+                                success: function(data) {
                                     Swal.fire(
                                         'Thành công!',
-                                        'Cập nhập thành công người dùng: ' + result,
+                                        data,
                                         'success'
-                                    )
+                                    );
+                                    reloadFeaturePost();
                                     $('#basic-datatables').DataTable().ajax.reload();
                                 },
                                 error: function(xhr, ajaxOptions, thrownError) {
-                                    console.log(xhr);
                                     Swal.fire(
                                         'Thất bại!',
                                         'Kiểm tra lại các trường nhập :)',
@@ -212,8 +209,8 @@
 
         }
 
-        // Handle delete User
-        function deleteUser(id) {
+        // Handle delete Tag
+        function deleteFeaturePost(id) {
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -223,7 +220,7 @@
             })
 
             swalWithBootstrapButtons.fire({
-                title: 'Bạn có muốn xóa người dùng này?',
+                title: 'Bạn có muốn xóa thẻ này?',
                 text: "Thao tác này sẽ không hoàn lại!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -234,7 +231,7 @@
                 if (result.isConfirmed) {
 
                     $.ajax({
-                        url: "{{ route('admin.deleteUser') }}",
+                        url: "{{ route('admin.deleteFeaturePost') }}",
                         type: 'post',
                         data: {
                             "_token": "{{ csrf_token() }}",
@@ -246,39 +243,14 @@
                                 'Xóa thành công!',
                                 'success'
                             )
+                            reloadFeaturePost();
                             $('#basic-datatables').DataTable().ajax.reload();
                         }
                     });
 
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Đã hủy!',
-                        'Không xóa người dùng này :)',
-                        'error'
-                    )
                 }
             })
 
-        }
-
-        function checkConfirmPwd() {
-
-            let pwd = $("#password").val();
-            let confirm_pwd = $("#confirm_password").val();
-            if (pwd === confirm_pwd && pwd.length > 5) {
-                $('#notifi i').removeClass("fa-xmark");
-                $('#notifi i').addClass("fa-check");
-                $('#notifi').addClass("text-success").removeClass("text-danger");
-                $('#notifi span').text('Mật khẩu đã chính xác');
-            } else {
-                $('#notifi i').removeClass("fa-check");
-                $('#notifi i').addClass("fa-xmark");
-                $('#notifi').addClass("text-danger").removeClass("text-success");
-                $('#notifi span').text('Mật khẩu chưa khớp');
-            }
         }
     </script>
 @endsection

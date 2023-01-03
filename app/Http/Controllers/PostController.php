@@ -111,6 +111,9 @@ class PostController extends Controller
                     <a href="' . route('admin.updatePost') . '?id=' . $id . '" class="btn btn-link btn-primary btn-lg p-2">
                         <i class="fa fa-edit"></i>
                     </a>
+                    <button type="button" class="btn btn-link btn-warning p-2" onClick="addFeaturePost(' . $id . ')">
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                    </button>
                     <button type="button" class="btn btn-link btn-danger p-2 btn-delete" onClick="deletePost(' . $id . ')">
                         <i class="fa fa-times"></i>
                     </button>

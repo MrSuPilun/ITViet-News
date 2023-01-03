@@ -47,6 +47,20 @@ Route::prefix('/admin')->namespace('\App\Http\Controllers')->group(function () {
                 Route::match(['GET', 'POST'], 'update-manager', 'AdminManagementController@updateManager')->name('admin.updateManager');
             });
         });
+
+        Route::prefix('custom-layout')->group(function () {
+            Route::prefix('feature-post')->group(function () {
+                Route::get('show', 'FeaturePostController@show')->name('admin.showFeaturePost');
+                Route::get('get', 'FeaturePostController@get')->name('admin.getFeaturePost');
+                Route::post('new', 'FeaturePostController@new')->name('admin.newFeaturePost');
+                Route::post('delete', 'FeaturePostController@delete')->name('admin.deleteFeaturePost');
+                Route::match(['GET', 'POST'], 'update', 'FeaturePostController@update')->name('admin.updateFeaturePost');
+            });
+        });
+
+        Route::prefix('preview')->group(function () {
+            Route::get('show-feature-post', 'PreviewController@showFeaturePost')->name('admin.preview.showFeaturePost');
+        });
     });
 });
 
