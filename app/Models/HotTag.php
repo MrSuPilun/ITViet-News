@@ -10,4 +10,9 @@ class HotTag extends Model
     use HasFactory;
 
     protected $fillable = ['tag_id', 'created_at', 'updated_at'];
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class, 'tag_id');
+    }
 }

@@ -52,10 +52,10 @@ class GetHotTags extends Command
             foreach ($tags as $item) {
                 DB::table('hot_tags')->insert(['tag_id' => $item->id, 'created_at' => now(), 'updated_at' => now()]);
             }
+
+            return true;
         } catch (\Throwable $th) {
             return false;
         }
-
-        return true;
     }
 }
