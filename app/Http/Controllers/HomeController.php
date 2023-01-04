@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Commands\GetHotTags;
 use App\Models\FeaturePost;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
