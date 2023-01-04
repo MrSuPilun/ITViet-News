@@ -2,24 +2,21 @@
     <div class="container">
         <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
-                <span class="text-uppercase cl2 p-r-8">
-                    Xu hướng:
-                </span>
-
-                <span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown"
-                    data-out="fadeOutDown">
-                    <span class="dis-inline-block slide100-txt-item animated visible-false">
-                        Interest rate angst trips up US equity bull market
+                @isset($posts)
+                    <span class="text-uppercase cl2 p-r-8">
+                        Bài viết nổi bật:
                     </span>
 
-                    <span class="dis-inline-block slide100-txt-item animated visible-false">
-                        Designer fashion show kicks off Variety Week
+                    <span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown"
+                        data-out="fadeOutDown">
+                        @foreach ($posts as $item)
+                            <span class="dis-inline-block slide100-txt-item animated visible-false">
+                                <a style="color: #666;"
+                                    href="{{ route('post', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                            </span>
+                        @endforeach
                     </span>
-
-                    <span class="dis-inline-block slide100-txt-item animated visible-false">
-                        Microsoft quisque at ipsum vel orci eleifend ultrices
-                    </span>
-                </span>
+                @endisset
             </div>
 
             <form action="{{ route('searchPostAndTag') }}" method="get">

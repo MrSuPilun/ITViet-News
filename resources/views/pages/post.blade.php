@@ -79,9 +79,9 @@
                                 </a>
                             </div>
                             {{-- Thumbnail --}}
-                            <div class="wrap-pic-max-w p-b-30">
+                            {{-- <div class="wrap-pic-max-w p-b-30">
                                 <img src="{{ $post->thumbnail }}" alt="IMG">
-                            </div>
+                            </div> --}}
 
                             {{-- CONTENT --}}
                             {!! $post->content !!}

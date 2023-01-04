@@ -13,7 +13,8 @@
                     </div>
                     <div class="card-body">
                         <iframe id="preview" width="100%" height="600px"
-                            src="{{ route('admin.preview.showFeaturePost') }}" frameborder="0"></iframe>
+                            src="{{ route('admin.preview.showFeaturePost') }}" frameborder="0"
+                            style="pointer-events: none;"></iframe>
                     </div>
                 </div>
             </div>
