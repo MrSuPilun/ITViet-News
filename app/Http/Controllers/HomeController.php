@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeaturePost;
+use App\Models\HotTag;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -10,12 +11,15 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $feature = FeaturePost::latest('id')->take(6)->get();
-        $posts = [];
-        foreach ($feature as $item) {
-            $posts[] = $item->post()->first();
-        }
-        return view('pages.home', compact('posts'));
+
+        $hotTags = HotTag::latest('id')->select('tag_id')->distinct('tag_id')->take(10)->get();
+        $posts = FeaturePost::latest('id')
+            ->take(6)
+            ->get()
+            ->map(function ($item) {
+                return $item->post()->first();
+            });
+        return view('pages.home', compact('posts', 'hotTags'));
     }
 
     public function viewPost(Request $request)
