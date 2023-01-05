@@ -12,6 +12,15 @@ function loadPostByTag($title, $take)
     return null;
 };
 
+function countPostByTag($title)
+{
+    $tags = Tag::where('title', $title)->first();
+    if ($tags) {
+        return $tags->posts()->count();
+    }
+    return 0;
+}
+
 function latestPosts()
 {
     return Post::latest('id')->take(7)->get();

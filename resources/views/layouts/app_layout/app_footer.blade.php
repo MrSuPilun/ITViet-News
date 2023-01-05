@@ -12,13 +12,12 @@
 
                     <div>
                         <p class="f1-s-1 cl11 p-b-16">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor magna eget
-                            elit efficitur, at accumsan sem placerat. Nulla tellus libero, mattis nec molestie at,
-                            facilisis ut turpis. Vestibulum dolor metus, tincidunt eget odio
+                            Website chia sẻ các tin tức công nghệ mới cho người dùng Việt Nam. Cập nhập nhanh chống
+                            thông tin công nghệ mới nhất trong và ngoài nước.
                         </p>
 
                         <p class="f1-s-1 cl11 p-b-16">
-                            Any questions? Call us on (+1) 96 716 6879
+                            Có câu hỏi hoặc khiếu nại? Liên hệ chúng tôi <br> Số điện thoại: (+84) 326015167
                         </p>
 
                         <div class="p-t-15">
@@ -48,104 +47,54 @@
                 <div class="col-sm-6 col-lg-4 p-b-20">
                     <div class="size-h-3 flex-s-c">
                         <h5 class="f1-m-7 cl0">
-                            Popular Posts
+                            Bài viết phổ biến
                         </h5>
                     </div>
 
                     <ul>
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{{ asset('assets/app/images/popular-post-01.jpg') }}" alt="IMG">
-                            </a>
+                        @foreach (getTopPosts(3) as $item)
+                            <li class="flex-wr-sb-s p-b-20">
+                                <a href="{{ route('post', ['id' => $item->id]) }}"
+                                    class="size-w-4 wrap-pic-w hov1 trans-03">
+                                    <img style="aspect-ratio: 4/3;
+                                    object-fit: cover;"
+                                        src="{{ $item->thumbnail }}" alt="IMG">
+                                </a>
 
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Donec metus orci, malesuada et lectus vitae
-                                    </a>
-                                </h6>
+                                <div class="size-w-5">
+                                    <h6 class="p-b-5">
+                                        <a href="{{ route('post', ['id' => $item->id]) }}"
+                                            class="f1-s-5 cl11 hov-cl10 trans-03">
+                                            {{ $item->title }}
+                                        </a>
+                                    </h6>
 
-                                <span class="f1-s-3 cl6">
-                                    Feb 17
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{{ asset('assets/app/images/popular-post-02.jpg') }}" alt="IMG">
-                            </a>
-
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Lorem ipsum dolor sit amet, consectetur
-                                    </a>
-                                </h6>
-
-                                <span class="f1-s-3 cl6">
-                                    Feb 16
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{{ asset('assets/app/images/popular-post-03.jpg') }}" alt="IMG">
-                            </a>
-
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Suspendisse dictum enim quis imperdiet auctor
-                                    </a>
-                                </h6>
-
-                                <span class="f1-s-3 cl6">
-                                    Feb 15
-                                </span>
-                            </div>
-                        </li>
+                                    <span class="f1-s-3 cl6">
+                                        {{ diffInTime($item->created_at) }}
+                                    </span>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
 
                 <div class="col-sm-6 col-lg-4 p-b-20">
+
                     <div class="size-h-3 flex-s-c">
                         <h5 class="f1-m-7 cl0">
-                            Category
+                            Danh mục
                         </h5>
                     </div>
 
                     <ul class="m-t--12">
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Fashion (22)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Technology (29)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Street Style (15)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Life Style (28)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                DIY & Crafts (16)
-                            </a>
-                        </li>
+                        @foreach ($featureTags as $item)
+                            <li class="how-bor1 p-rl-5 p-tb-10">
+                                <a href="{{ route('searchPostsByTag', ['t' => $item]) }}"
+                                    class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                    {{ $item }} ({{ countPostByTag($item) }})
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

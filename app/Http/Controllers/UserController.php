@@ -16,7 +16,8 @@ class UserController extends Controller
 {
     public function profile()
     {
-        return view('user.profile');
+        $featureTags = ['Sản phẩm', 'Trò chơi', 'Cuộc thi', 'Blockchain', 'AI', 'Chia sẻ'];
+        return view('user.profile', compact('featureTags'));
     }
 
     public function login(Request $request)

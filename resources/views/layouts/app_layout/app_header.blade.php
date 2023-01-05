@@ -82,9 +82,9 @@
                     @endforeach
                 @endisset
 
-                <li>
+                {{-- <li>
                     <a href="#">Liên hệ</a>
-                </li>
+                </li> --}}
             </ul>
         </div>
 
@@ -128,9 +128,9 @@
                             @endforeach
                         @endisset
 
-                        <li class="mega-menu-item">
+                        {{-- <li class="mega-menu-item">
                             <a href="#">Liên hệ <i class="fa-solid fa-phone-flip ml-1"></i></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </nav>
             </div>
