@@ -2,7 +2,7 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-primary">
-                <li class="nav-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                     <a class="collapsed" href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Bảng điều khiển</p>
@@ -13,7 +13,7 @@
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
                     <h4 class="text-section">Components</h4>
-                </li>
+                </li> --}}
                 <li class="nav-item {{ request()->is('admin/base*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
@@ -90,7 +90,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a data-toggle="collapse" href="#charts">
                         <i class="far fa-chart-bar"></i>
                         <p>Thống kê</p>
@@ -110,7 +110,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

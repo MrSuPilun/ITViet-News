@@ -28,7 +28,8 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/TimeVNHelper.php"
+            "app/Helpers/TimeVNHelper.php",
+            "app/Helpers/LoadPostByTag.php"
         ],
         "psr-4": {
             "App\\": "app/",
