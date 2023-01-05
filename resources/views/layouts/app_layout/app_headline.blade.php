@@ -10,10 +10,12 @@
                     <span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown"
                         data-out="fadeOutDown">
                         @foreach ($posts as $item)
-                            <span class="dis-inline-block slide100-txt-item animated visible-false">
-                                <a style="color: #666;"
-                                    href="{{ route('post', ['id' => $item->id]) }}">{{ $item->title }}</a>
-                            </span>
+                            @if ($item)
+                                <span class="dis-inline-block slide100-txt-item animated visible-false">
+                                    <a style="color: #666;"
+                                        href="{{ route('post', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                </span>
+                            @endif
                         @endforeach
                     </span>
                 @endisset

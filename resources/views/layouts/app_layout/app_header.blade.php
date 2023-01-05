@@ -74,29 +74,17 @@
                     <a href="category-01.html">Tin tức</a>
                 </li>
 
-                <li>
-                    <a href="category-02.html">Sản phẩm</a>
-                </li>
+                @isset($featureTags)
+                    @foreach ($featureTags as $item)
+                        <li>
+                            <a href="{{ route('searchPostsByTag', ['t' => $item]) }}">{{ $item }}</a>
+                        </li>
+                    @endforeach
+                @endisset
 
-                <li>
-                    <a href="category-01.html">Trò chơi</a>
-                </li>
-
-                <li>
-                    <a href="category-02.html">Cuộc thi</a>
-                </li>
-
-                <li>
-                    <a href="category-01.html">Blockchain</a>
-                </li>
-
-                <li>
-                    <a href="category-02.html">AI</a>
-                </li>
-
-                <li>
-                    <a href="#">Features</a>
-                </li>
+                {{-- <li>
+                    <a href="#">Liên hệ</a>
+                </li> --}}
             </ul>
         </div>
 
@@ -113,9 +101,9 @@
             <div class="main-nav">
                 <!-- Menu desktop -->
                 <nav class="menu-desktop">
-                    <a class="logo-stick" href="/">
+                    {{-- <a class="logo-stick" href="/">
                         <img src="{{ asset('assets/app/images/icons/logo-01.png') }}" alt="LOGO">
-                    </a>
+                    </a> --}}
 
                     <ul class="main-menu justify-content-center">
                         <li class="@if (request()->is('/')) main-menu-active @else mega-menu-item @endif">
@@ -132,29 +120,17 @@
                             </a>
                         </li>
 
-                        <li class="mega-menu-item">
-                            <a href="category-02.html">Sản phẩm</a>
-                        </li>
+                        @isset($featureTags)
+                            @foreach ($featureTags as $item)
+                                <li class="@if (request()->fullUrl() == route('searchPostsByTag', ['t' => $item])) main-menu-active @else mega-menu-item @endif">
+                                    <a href="{{ route('searchPostsByTag', ['t' => $item]) }}">{{ $item }}</a>
+                                </li>
+                            @endforeach
+                        @endisset
 
-                        <li class="mega-menu-item">
-                            <a href="category-01.html">Trò chơi</a>
-                        </li>
-
-                        <li class="mega-menu-item">
-                            <a href="category-02.html">Cuộc thi</a>
-                        </li>
-
-                        <li class="mega-menu-item">
-                            <a href="category-01.html">Blockchain</a>
-                        </li>
-
-                        <li class="mega-menu-item">
-                            <a href="category-02.html">AI</a>
-                        </li>
-
-                        <li class="mega-menu-item">
+                        {{-- <li class="mega-menu-item">
                             <a href="#">Liên hệ <i class="fa-solid fa-phone-flip ml-1"></i></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </nav>
             </div>

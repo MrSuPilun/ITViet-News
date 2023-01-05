@@ -13,13 +13,15 @@ class HomeController extends Controller
     {
 
         $hotTags = HotTag::latest('id')->select('tag_id')->distinct('tag_id')->take(10)->get();
+        // 'Sản phẩm', 'Trò chơi', 'Cuộc thi', 'Blockchain', 'AI', 'Chia sẻ'
+        $featureTags = ['Sản phẩm', 'Trò chơi', 'Cuộc thi', 'Blockchain', 'AI', 'Chia sẻ'];
         $posts = FeaturePost::latest('id')
             ->take(6)
             ->get()
             ->map(function ($item) {
                 return $item->post()->first();
             });
-        return view('pages.home', compact('posts', 'hotTags'));
+        return view('pages.home', compact('posts', 'hotTags', 'featureTags'));
     }
 
     public function viewPost(Request $request)
@@ -29,8 +31,9 @@ class HomeController extends Controller
             $post->view += 1;
             $post->save();
 
+            $featureTags = ['Sản phẩm', 'Trò chơi', 'Cuộc thi', 'Blockchain', 'AI', 'Chia sẻ'];
             if ($post) {
-                return view('pages.post', ['post' => $post]);
+                return view('pages.post', compact('post', 'featureTags'));
             }
         }
         return redirect('/');
@@ -38,7 +41,8 @@ class HomeController extends Controller
 
     public function news()
     {
+        $featureTags = ['Sản phẩm', 'Trò chơi', 'Cuộc thi', 'Blockchain', 'AI', 'Chia sẻ'];
         $posts = Post::latest('created_at')->take(20)->get();
-        return view('pages.news', compact('posts'));
+        return view('pages.news', compact('posts', 'featureTags'));
     }
 }

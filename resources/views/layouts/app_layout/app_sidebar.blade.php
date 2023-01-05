@@ -5,60 +5,22 @@
         <div class="p-b-30">
             <div class="how2 how2-cl4 flex-s-c">
                 <h3 class="f1-m-2 cl3 tab01-title">
-                    Bài viết nổi bật
+                    Bài viết nhiều lượt xem nhất
                 </h3>
             </div>
 
             <ul class="p-t-35">
-                <li class="flex-wr-sb-s p-b-22">
-                    <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                        1
-                    </div>
+                @foreach (getTopPosts(5) as $item)
+                    <li class="flex-wr-sb-s p-b-22">
+                        <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                            {{ $loop->iteration }}
+                        </div>
 
-                    <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </a>
-                </li>
-
-                <li class="flex-wr-sb-s p-b-22">
-                    <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                        2
-                    </div>
-
-                    <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Proin velit consectetur non neque
-                    </a>
-                </li>
-
-                <li class="flex-wr-sb-s p-b-22">
-                    <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                        3
-                    </div>
-
-                    <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Nunc vestibulum, enim vitae condimentum volutpat lobortis ante
-                    </a>
-                </li>
-
-                <li class="flex-wr-sb-s p-b-22">
-                    <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                        4
-                    </div>
-
-                    <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Proin velit justo consectetur non neque elementum
-                    </a>
-                </li>
-
-                <li class="flex-wr-sb-s p-b-22">
-                    <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0">
-                        5
-                    </div>
-
-                    <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Proin velit consectetur non neque
-                    </a>
-                </li>
+                        <a href="{{ route('post', ['id' => $item->id]) }}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                            {{ $item->title }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
 
@@ -69,7 +31,7 @@
             </a>
         </div>
 
-        <!-- Video -->
+        {{-- <!-- Video -->
         <div class="p-b-55">
             <div class="how2 how2-cl4 flex-s-c m-b-35">
                 <h3 class="f1-m-2 cl3 tab01-title">
@@ -109,7 +71,7 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Tag -->
         @isset($hotTags)
