@@ -128,7 +128,7 @@
                         @if (auth('user')->user()->avatar)
                             <img src="{{ auth('user')->user()->avatar }}" class="img-responsive" alt="">
                         @else
-                            <img src="{{ asset('assets/app/images/avatars/male.png') }}" class="img-responsive"
+                            <img src="{{ asset('assets/app/images/avatars/user.png') }}" class="img-responsive"
                                 alt="">
                         @endif
 

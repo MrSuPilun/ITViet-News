@@ -5,7 +5,7 @@
             @if ($item->user()->avatar)
                 <img class="rounded-circle" src="{{ $item->user()->avatar }}" width="40">
             @else
-                <img class="rounded-circle" src="{{ asset('assets/app/images/avatars/male.png') }}" width="40">
+                <img class="rounded-circle" src="{{ asset('assets/app/images/avatars/user.png') }}" width="40">
             @endif
         </div>
         <div class="d-flex flex-column justify-content-start ml-2 w-100">
