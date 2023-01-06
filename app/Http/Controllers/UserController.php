@@ -20,6 +20,49 @@ class UserController extends Controller
         return view('user.profile', compact('featureTags'));
     }
 
+    public function profileSetting(Request $request)
+    {
+        if (auth('user')->check()) {
+            if ($request->isMethod('POST')) {
+                $validate = [
+                    'name.required' => 'Không được bỏ trống tên',
+                    'email.required' => 'Không được bỏ trống email',
+                    'email.email' => 'Vui lòng nhập đúng định dạng email',
+                    'email.unique' => 'Địa chỉ email đã tồn tại.',
+                    'phone.numeric' => 'Vui lòng nhập đúng định dạng số điện thoại',
+                    'phone.min' => 'Số điện thoại phải nhiều hơn 10 ký tự.'
+                ];
+
+                $data = $request->validate([
+                    'name' => ['required'],
+                    'email' => ['required', 'email', 'unique:users,email,' . auth('user')->user()->id . ',id'],
+                    'phone' => ['numeric', 'min:10'],
+                    'address' => ['nullable']
+                ], $validate);
+
+                $user = User::find(auth('user')->user()->id)->update([
+                    'name' => $data['name'],
+                    'phone' => $data['phone'],
+                    'email' => $data['email'],
+                    'address' => $data['address']
+                ]);
+
+                if ($user) {
+                    toast('Cập nhập thành công!', 'success');
+                } else {
+                    toast('Cập nhập không thành công!', 'error');
+                }
+
+                return redirect()->back();
+            }
+            $user = User::find(auth('user')->user()->id);
+            $featureTags = ['Sản phẩm', 'Trò chơi', 'Cuộc thi', 'Blockchain', 'AI', 'Chia sẻ'];
+            return view('user.profile_setting', compact('featureTags', 'user'));
+        }
+
+        return redirect()->route('login');
+    }
+
     public function login(Request $request)
     {
         if ($request->isMethod('POST')) {

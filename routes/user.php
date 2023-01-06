@@ -12,4 +12,5 @@ Route::prefix('/user')->namespace('\App\Http\Controllers')->middleware(['auth:us
     Route::get('logout', 'UserController@logout')->name('user.logout');
 
     Route::post('comment', 'PostCommentController@create')->name('user.comment');
+    Route::match(['get', 'post'], 'profile-setting', 'UserController@profileSetting')->name('user.profileSetting');
 });
