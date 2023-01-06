@@ -31,6 +31,7 @@ class PostComment extends Model
 
     public function getUserComment()
     {
-        return $this->parent()->first()->user()->first();
+        // return $this->parent()->first()->user()->first();
+        return $this->parent()->first()->user();
     }
 }
