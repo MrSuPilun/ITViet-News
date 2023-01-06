@@ -4,6 +4,9 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.16/sweetalert2.min.js"
+        integrity="sha512-4aFcnPgoxsyUPgn8gNinplVIEoeBizjYPTpmOaUbC3VZQCsRnduAOch9v0Pn30yTeoWq1rIZByAE4/Gg79VPEA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body,
         html,
@@ -150,12 +153,12 @@
                     <!-- SIDEBAR MENU -->
                     <div class="profile-usermenu">
                         <ul class="nav">
-                            <li class="active">
+                            <li>
                                 <a href="{{ route('user.profile') }}">
                                     <i class="glyphicon glyphicon-home"></i>
                                     Thông tin người dùng </a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="{{ route('user.profileSetting') }}">
                                     <i class="glyphicon glyphicon-user"></i>
                                     Cài đặt tài khoản </a>
@@ -172,40 +175,84 @@
             </div>
             <div class="col-md-9">
                 <div class="profile-content">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Tên</label>
+                    <form id="form-profile-user" class="form" action="{{ route('user.profileSetting') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+
+                            <div class="col-xs-12">
+                                <label for="name">
+                                    <h4>Họ và Tên</h4>
+                                </label>
+                                <input type="text" class="form-control" name="name" placeholder="Họ và tên"
+                                    value="{{ $user->name }}" title="Nhập vào tên đầy đủ của bạn.">
+                                @error('name')
+                                    <small class="form-text text-danger">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <p>{{ auth('user')->user()->name }}</p>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="phone">
+                                    <h4>Số điện thoại</h4>
+                                </label>
+                                <input type="text" class="form-control" name="phone" placeholder="Số điện thoại"
+                                    value="{{ $user->phone }}" title="Nhập vào số điện thoại của bạn.">
+                                @error('phone')
+                                    <small class="form-text text-danger">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Số điện thoại</label>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="email">
+                                    <h4>Email</h4>
+                                </label>
+                                <input type="email" class="form-control" name="email" placeholder="you@email.com"
+                                    value="{{ $user->email }}" title="Nhập vào địa chỉ email của bạn.">
+                                @error('email')
+                                    <small class="form-text text-danger">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <p>{{ auth('user')->user()->phone }}</p>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-12">
+                                <label for="address">
+                                    <h4>Địa chỉ</h4>
+                                </label>
+                                <textarea maxlength="254" type="text" class="form-control" name="address" placeholder="Địa chỉ"
+                                    title="enter your password.">{{ $user->address }}</textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Email</label>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit">
+                                    <i class="glyphicon glyphicon-ok-sign"></i>
+                                    Cập nhập
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <p>{{ auth('user')->user()->email }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Địa chỉ</label>
-                        </div>
-                        <div class="col-md-8">
-                            <p>{{ auth('user')->user()->address }}</p>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    <!-- Sweet Alert -->
+    @include('sweetalert::alert')
 @endsection
